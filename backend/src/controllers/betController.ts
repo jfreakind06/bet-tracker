@@ -1,34 +1,61 @@
 import { Request, Response } from 'express';
-import db from '../db';
+import knex from 'knex';
+// @ts-ignore
+import config from '../../knexfile';
+import { AuthRequest } from '../middleware/auth';
 
-export const addBet = async (req: any, res: Response) => {
+const db = knex(config.development);
+
+// Add a new bet
+export const addBet = async (req: AuthRequest, res: Response) => {
   const { date, description, amountRisked, odds, result, payout } = req.body;
+
+  const userId = req.user?.userId;
+  if (!userId) return res.status(401).json({ error: 'Unauthorized' });
+
   try {
-    const bet = await db('bets').insert({
-      user_id: req.user.userId,
-      date,
-      description,
-      amount_risked: amountRisked,
-      odds,
-      result,
-      payout,
-    }).returning('*');
-    res.json(bet[0]);
-  } catch {
+    const bet = await db('bets')
+      .insert({
+        user_id: userId,
+        date,
+        description,
+        amount_risked: amountRisked,
+        odds,
+        result,
+        payout,
+      })
+      .returning('*');
+
+    res.status(201).json(bet[0]);
+  } catch (error) {
+    console.error('Error adding bet:', error);
     res.status(400).json({ error: 'Failed to add bet' });
   }
 };
 
-export const getBets = async (req: any, res: Response) => {
-  const bets = await db('bets')
-    .where({ user_id: req.user.userId })
-    .orderBy('date', 'desc');
-  res.json(bets);
+// Get all bets for the logged-in user
+export const getBets = async (req: AuthRequest, res: Response) => {
+  const userId = req.user?.userId;
+  if (!userId) return res.status(401).json({ error: 'Unauthorized' });
+
+  try {
+    const bets = await db('bets')
+      .where({ user_id: userId })
+      .orderBy('date', 'desc');
+
+    res.json(bets);
+  } catch (error) {
+    console.error('Error fetching bets:', error);
+    res.status(500).json({ error: 'Failed to fetch bets' });
+  }
 };
 
-export const getROI = async (req: any, res: Response) => {
+// Calculate ROI based on timeframe
+export const getROI = async (req: AuthRequest, res: Response) => {
+  const userId = req.user?.userId;
+  if (!userId) return res.status(401).json({ error: 'Unauthorized' });
+
   const { timeframe } = req.query;
-  const userId = req.user.userId;
   let fromDate = new Date();
 
   switch (timeframe) {
@@ -49,13 +76,21 @@ export const getROI = async (req: any, res: Response) => {
       fromDate = new Date(0);
   }
 
-  const bets = await db('bets')
-    .where('user_id', userId)
-    .andWhere('date', '>=', fromDate);
+  try {
+    const bets = await db('bets')
+      .where('user_id', userId)
+      .andWhere('date', '>=', fromDate);
 
-  const totalRisked = bets.reduce((sum, b) => sum + Number(b.amount_risked), 0);
-  const totalWon = bets.reduce((sum, b) => sum + (b.result === 'win' ? Number(b.payout) : 0), 0);
-  const roi = totalRisked > 0 ? ((totalWon - totalRisked) / totalRisked) * 100 : 0;
+    const totalRisked = bets.reduce((sum, b) => sum + Number(b.amount_risked), 0);
+    const totalWon = bets.reduce(
+      (sum, b) => sum + (b.result === 'win' ? Number(b.payout) : 0),
+      0
+    );
+    const roi = totalRisked > 0 ? ((totalWon - totalRisked) / totalRisked) * 100 : 0;
 
-  res.json({ roi, totalRisked, totalWon, count: bets.length, timeframe });
+    res.json({ roi, totalRisked, totalWon, count: bets.length, timeframe });
+  } catch (error) {
+    console.error('Error calculating ROI:', error);
+    res.status(500).json({ error: 'Failed to calculate ROI' });
+  }
 };

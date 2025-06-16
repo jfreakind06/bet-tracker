@@ -20,8 +20,10 @@ export const register = async (req: Request, res: Response) => {
 
     res.status(201).json({ message: 'User registered successfully' });
   } catch (err) {
+    console.error("Registration error:", err); 
     res.status(500).json({ error: 'Registration failed' });
   }
+
 };
 
 export const login = async (req: Request, res: Response) => {
