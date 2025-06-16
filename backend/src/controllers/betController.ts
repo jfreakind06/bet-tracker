@@ -3,6 +3,7 @@ import knex from 'knex';
 // @ts-ignore
 import config from '../../knexfile';
 import { AuthRequest } from '../middleware/auth';
+import { convertAmericanToDecimal, calculatePayoutFromOdds } from '../utils/convertOdds'
 
 const db = knex(config.development);
 
@@ -14,15 +15,18 @@ export const addBet = async (req: AuthRequest, res: Response) => {
   if (!userId) return res.status(401).json({ error: 'Unauthorized' });
 
   try {
+    const decimalOdds = convertAmericanToDecimal(Number(odds));
     const bet = await db('bets')
       .insert({
         user_id: userId,
         date,
         description,
         amount_risked: amountRisked,
-        odds,
+        odds: decimalOdds,
         result,
-        payout,
+        payout: result === 'win'
+          ? calculatePayoutFromOdds(amountRisked, odds)
+          : payout,
       })
       .returning('*');
 

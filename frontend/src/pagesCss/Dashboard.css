@@ -1,0 +1,112 @@
+.dashboard {
+  padding: 1rem;
+  max-width: 600px;
+  margin: 0 auto;
+  font-family: sans-serif;
+}
+
+.dashboard__heading {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.dashboard__form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-bottom: 2rem;
+}
+
+.dashboard__input {
+  padding: 0.5rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+.dashboard__label {
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  display: block;
+}
+
+.dashboard__button {
+  padding: 0.75rem;
+  font-size: 1rem;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.dashboard__button:hover {
+  background-color: #0056b3;
+}
+
+.dashboard__bets {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 2rem 0;
+}
+
+.dashboard__bet {
+  background-color: #f9f9f9;
+  padding: 0.75rem;
+  margin-bottom: 0.5rem;
+  border-radius: 4px;
+  font-size: 0.95rem;
+}
+
+.dashboard__divider {
+  border: none;
+  height: 1px;
+  background-color: #ccc;
+  margin: 2rem 0;
+}
+
+.dashboard__filter {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.dashboard__error {
+  color: red;
+  font-weight: bold;
+  text-align: center;
+}
+
+.dashboard__roi p {
+  margin: 0.25rem 0;
+  font-size: 0.95rem;
+}
+
+/* Responsive */
+@media (min-width: 600px) {
+  .dashboard__form {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .dashboard__input {
+    flex: 1 1 45%;
+  }
+
+  .dashboard__button {
+    flex: 1 1 100%;
+    margin-top: 1rem;
+  }
+
+  .dashboard__filter {
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+  }
+}
