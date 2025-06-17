@@ -1,112 +1,241 @@
+/* Core layout */
 .dashboard {
-  padding: 1rem;
-  max-width: 600px;
+  max-width: 960px;
   margin: 0 auto;
-  font-family: sans-serif;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  animation: fadeIn 0.4s ease-in-out;
 }
 
-.dashboard__heading {
-  font-size: 1.5rem;
-  margin-bottom: 1rem;
-  text-align: center;
+/* Header */
+.dashboard__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.dashboard__title {
+  font-size: 1.75rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+/* Add Bet Button */
+.dashboard__add-btn {
+  background-color: #007bff;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  font-size: 1rem;
+  cursor: pointer;
+  border: none;
+  transition: background-color 0.3s ease;
+}
+
+.dashboard__add-btn:hover {
+  background-color: #0056b3;
+}
+
+/* Tabs */
+.dashboard__tabs {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.dashboard__tab {
+  padding: 0.5rem 1rem;
+  border: none;
+  background: none;
+  color: #ddd;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background 0.3s;
+}
+
+.dashboard__tab--active {
+  background-color: #1a73e8;
+  color: white;
+}
+
+/* Bet List */
+.dashboard__list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* Bet Card */
+.dashboard__bet {
+  border: 1px solid #444;
+  border-left: 5px solid gray;
+  background-color: #1e1e1e;
+  padding: 1rem;
+  border-radius: 6px;
+  transition: transform 0.3s ease;
+}
+
+.dashboard__bet:hover {
+  transform: scale(1.01);
+}
+
+.dashboard__bet--win {
+  border-left-color: green;
+}
+
+.dashboard__bet--loss {
+  border-left-color: red;
+}
+
+.dashboard__bet--push {
+  border-left-color: gray;
+}
+
+.dashboard__bet--open {
+  border-left-color: orange;
+}
+
+.dashboard__bet-main {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.dashboard__bet-payout {
+  font-weight: bold;
+  margin-top: 0.5rem;
+  color: #00ff99;
+}
+
+/* ROI Card */
+.dashboard__roi {
+  border: 1px solid #444;
+  padding: 1rem;
+  border-radius: 6px;
+  background-color: #1e1e1e;
+}
+
+.dashboard__roi h2 {
+  margin-bottom: 0.5rem;
+}
+
+.dashboard__select {
+  padding: 0.5rem;
+  font-size: 1rem;
+  border-radius: 4px;
+  background: #111;
+  color: #fff;
+  border: 1px solid #444;
+  margin-top: 0.25rem;
+}
+
+.dashboard__roi-values p {
+  margin: 0.25rem 0;
+}
+
+/* Modal */
+.dashboard__modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.dashboard__modal {
+  background-color: #1e1e1e;
+  padding: 2rem;
+  border-radius: 8px;
+  max-width: 500px;
+  width: 90%;
+  animation: fadeInUp 0.3s ease;
+  position: relative;
+}
+
+.dashboard__modal-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: none;
+  border: none;
+  font-size: 1.25rem;
+  color: white;
+  cursor: pointer;
 }
 
 .dashboard__form {
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
-  margin-bottom: 2rem;
+  margin-top: 1rem;
 }
 
-.dashboard__input {
+.dashboard__input,
+.dashboard__select,
+.dashboard__button {
   padding: 0.5rem;
   font-size: 1rem;
-  border: 1px solid #ccc;
   border-radius: 4px;
-  font-size: 1rem;
-  width: 100%;
-  margin-bottom: 1rem;
+  border: 1px solid #444;
 }
 
 .dashboard__label {
-  margin-bottom: 0.5rem;
-  font-weight: 600;
-  display: block;
+  font-weight: bold;
+  margin-top: 0.5rem;
 }
 
 .dashboard__button {
-  padding: 0.75rem;
-  font-size: 1rem;
-  background-color: #007bff;
+  background-color: #28a745;
   color: white;
-  border: none;
-  border-radius: 4px;
   cursor: pointer;
+  border: none;
 }
 
 .dashboard__button:hover {
-  background-color: #0056b3;
+  background-color: #218838;
 }
 
-.dashboard__bets {
-  list-style: none;
-  padding: 0;
-  margin: 0 0 2rem 0;
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
-.dashboard__bet {
-  background-color: #f9f9f9;
-  padding: 0.75rem;
-  margin-bottom: 0.5rem;
-  border-radius: 4px;
-  font-size: 0.95rem;
-}
-
-.dashboard__divider {
-  border: none;
-  height: 1px;
-  background-color: #ccc;
-  margin: 2rem 0;
-}
-
-.dashboard__filter {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  margin-bottom: 1rem;
-}
-
-.dashboard__error {
-  color: red;
-  font-weight: bold;
-  text-align: center;
-}
-
-.dashboard__roi p {
-  margin: 0.25rem 0;
-  font-size: 0.95rem;
+@keyframes fadeInUp {
+  from {
+    transform: translateY(10px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
 
 /* Responsive */
-@media (min-width: 600px) {
-  .dashboard__form {
-    flex-direction: row;
-    flex-wrap: wrap;
-    gap: 1rem;
+@media (max-width: 768px) {
+  .dashboard__header {
+    flex-direction: column;
+    align-items: flex-start;
   }
 
-  .dashboard__input {
-    flex: 1 1 45%;
+  .dashboard__tabs {
+    justify-content: flex-start;
+    gap: 0.25rem;
   }
 
-  .dashboard__button {
-    flex: 1 1 100%;
-    margin-top: 1rem;
-  }
-
-  .dashboard__filter {
-    flex-direction: row;
-    align-items: center;
-    gap: 1rem;
+  .dashboard__modal {
+    padding: 1rem;
   }
 }
