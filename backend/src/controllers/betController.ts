@@ -5,7 +5,7 @@ import config from '../../knexfile';
 import { AuthRequest } from '../middleware/auth';
 import { convertAmericanToDecimal, calculatePayoutFromOdds } from '../utils/convertOdds'
 
-const db = knex(config.development);
+const db = knex(config[process.env.NODE_ENV || 'development']);
 
 // Add a new bet
 export const addBet = async (req: AuthRequest, res: Response) => {

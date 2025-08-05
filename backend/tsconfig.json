@@ -12,6 +12,6 @@
     "skipLibCheck": true,
     "types": ["node"]
   },
-  "include": ["src/**/*", "knexfile.ts", "migrations"],
+  "include": ["src/**/*", "knexfile.js"],
   "exclude": ["node_modules", "dist"]
 }

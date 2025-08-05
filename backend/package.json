@@ -5,8 +5,9 @@
   "scripts": {
     "dev": "ts-node src/index.ts",
     "build": "tsc",
-    "start": "node dist/index.js",
-    "migrate": "knex migrate:latest"
+    "start": "npm run migrate:prod && node dist/index.js",
+    "migrate": "knex migrate:latest",
+    "migrate:prod": "NODE_ENV=production knex migrate:latest"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
