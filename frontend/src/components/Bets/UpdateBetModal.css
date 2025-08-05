@@ -1,0 +1,400 @@
+/* Update Bet Modal - Mobile First */
+
+.update-bet-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-lg);
+  z-index: var(--z-modal);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+.update-bet-modal {
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-xl);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  max-width: 500px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  animation: slideUp 0.3s ease-out;
+}
+
+.update-bet-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-lg);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.update-bet-modal-title {
+  font-size: var(--font-size-xl);
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.update-bet-modal-close {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  font-size: var(--font-size-xl);
+  cursor: pointer;
+  padding: var(--space-xs);
+  border-radius: var(--radius-md);
+  transition: all 0.2s ease-in-out;
+  line-height: 1;
+  min-width: var(--tap-target-min);
+  min-height: var(--tap-target-min);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.update-bet-modal-close:hover {
+  color: var(--text-primary);
+  background-color: var(--bg-tertiary);
+}
+
+.update-bet-modal-content {
+  padding: var(--space-lg);
+}
+
+/* Bet Summary */
+.bet-summary {
+  background-color: var(--bg-tertiary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: var(--space-lg);
+  margin-bottom: var(--space-lg);
+}
+
+.bet-summary-title {
+  font-size: var(--font-size-lg);
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0 0 var(--space-md) 0;
+}
+
+.bet-summary-details {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-sm);
+}
+
+.bet-detail {
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+}
+
+.bet-detail strong {
+  color: var(--text-primary);
+}
+
+/* Form Styles */
+.update-bet-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.form-error {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: var(--space-md);
+  background-color: rgba(220, 53, 69, 0.1);
+  border: 1px solid var(--error-color);
+  border-radius: var(--radius-md);
+  color: var(--error-color);
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+}
+
+.error-icon {
+  font-size: var(--font-size-base);
+  flex-shrink: 0;
+}
+
+/* Result Options */
+.result-options {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-md);
+  margin-top: var(--space-sm);
+}
+
+.result-option {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  position: relative;
+}
+
+.result-option input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.result-option-label {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: var(--space-md);
+  border: 2px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  background-color: var(--bg-primary);
+  color: var(--text-secondary);
+  font-weight: 500;
+  font-size: var(--font-size-base);
+  transition: all 0.2s ease-in-out;
+  width: 100%;
+  min-height: var(--tap-target-min);
+  justify-content: center;
+}
+
+.result-option input[type="radio"]:checked + .result-option-label {
+  border-color: var(--primary-color);
+  background-color: rgba(26, 115, 232, 0.1);
+  color: var(--text-primary);
+}
+
+.result-option-label.win:hover,
+.result-option input[type="radio"]:checked + .result-option-label.win {
+  border-color: var(--success-color);
+  background-color: rgba(0, 255, 153, 0.1);
+}
+
+.result-option-label.loss:hover,
+.result-option input[type="radio"]:checked + .result-option-label.loss {
+  border-color: var(--error-color);
+  background-color: rgba(220, 53, 69, 0.1);
+}
+
+.result-option-label.push:hover,
+.result-option input[type="radio"]:checked + .result-option-label.push {
+  border-color: var(--warning-color);
+  background-color: rgba(255, 165, 0, 0.1);
+}
+
+.result-option:hover .result-option-label {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Form Help Text */
+.form-help {
+  font-size: var(--font-size-xs);
+  color: var(--text-muted);
+  margin-top: var(--space-xs);
+  display: block;
+}
+
+/* Confirmation Dialog */
+.confirmation-dialog {
+  background-color: var(--bg-tertiary);
+  border: 2px solid var(--border-color);
+  border-radius: var(--radius-xl);
+  padding: var(--space-xl);
+  margin-bottom: var(--space-lg);
+  animation: slideUp 0.3s ease-out;
+}
+
+.confirmation-content {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.confirmation-icon {
+  font-size: 3rem;
+  margin-bottom: var(--space-sm);
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+}
+
+.confirmation-title {
+  font-size: var(--font-size-xl);
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.confirmation-message {
+  font-size: var(--font-size-base);
+  color: var(--text-secondary);
+  margin: 0;
+  line-height: var(--line-height-relaxed);
+}
+
+.confirmation-message strong {
+  color: var(--text-primary);
+  text-transform: capitalize;
+}
+
+.confirmation-details {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  padding: var(--space-md);
+  background-color: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  width: 100%;
+}
+
+.confirmation-bet {
+  font-weight: 600;
+  color: var(--text-primary);
+  font-size: var(--font-size-base);
+}
+
+.confirmation-payout {
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+}
+
+.confirmation-actions {
+  display: flex;
+  gap: var(--space-md);
+  width: 100%;
+  margin-top: var(--space-md);
+}
+
+.confirmation-actions .btn {
+  flex: 1;
+  font-weight: 600;
+  min-height: var(--tap-target-min);
+}
+
+.btn-success {
+  background: linear-gradient(135deg, var(--success-color), #00cc7a);
+  color: var(--bg-primary);
+  border: none;
+}
+
+.btn-success:hover {
+  background: linear-gradient(135deg, #00cc7a, var(--success-color));
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 255, 153, 0.3);
+}
+
+.btn-error {
+  background: linear-gradient(135deg, var(--error-color), #c53030);
+  color: white;
+  border: none;
+}
+
+.btn-error:hover {
+  background: linear-gradient(135deg, #c53030, var(--error-color));
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(220, 53, 69, 0.3);
+}
+
+/* Form Actions */
+.form-actions {
+  display: flex;
+  gap: var(--space-md);
+  padding-top: var(--space-md);
+  border-top: 1px solid var(--border-color);
+}
+
+.form-actions .btn {
+  flex: 1;
+  justify-content: center;
+}
+
+/* Responsive Design */
+@media (min-width: 640px) {
+  .bet-summary-details {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .result-options {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  
+  .form-actions {
+    flex-direction: row;
+  }
+  
+  .form-actions .btn {
+    flex: 0 1 auto;
+    min-width: 120px;
+  }
+}
+
+@media (min-width: 768px) {
+  .update-bet-modal {
+    max-width: 600px;
+  }
+  
+  .update-bet-modal-header {
+    padding: var(--space-xl);
+  }
+  
+  .update-bet-modal-content {
+    padding: var(--space-xl);
+  }
+  
+  .bet-summary {
+    padding: var(--space-xl);
+  }
+}
+
+/* Animation */
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .update-bet-modal {
+    animation: none;
+  }
+  
+  .result-option:hover .result-option-label {
+    transform: none;
+  }
+}
+
+/* Dark mode adjustments */
+@media (prefers-color-scheme: dark) {
+  .update-bet-modal {
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+  }
+}
+
+/* High contrast mode */
+@media (prefers-contrast: high) {
+  .update-bet-modal {
+    border-width: 2px;
+  }
+  
+  .result-option-label {
+    border-width: 3px;
+  }
+  
+  .bet-summary {
+    border-width: 2px;
+  }
+}

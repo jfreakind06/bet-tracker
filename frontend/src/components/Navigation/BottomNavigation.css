@@ -1,0 +1,202 @@
+/* Bottom Navigation - Mobile First */
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: var(--z-fixed);
+  background-color: var(--bg-secondary);
+  border-top: 1px solid var(--border-color);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  padding-bottom: env(safe-area-inset-bottom, 0);
+}
+
+.bottom-nav__container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: var(--space-xs) var(--space-sm);
+  max-width: var(--container-sm);
+  margin: 0 auto;
+}
+
+.bottom-nav__item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: var(--tap-target-min);
+  min-width: var(--tap-target-min);
+  padding: var(--space-xs) var(--space-sm);
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  text-decoration: none;
+  cursor: pointer;
+  border-radius: var(--radius-md);
+  transition: all 0.2s ease-in-out;
+  position: relative;
+  font-size: var(--font-size-xs);
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.bottom-nav__item:focus {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
+}
+
+.bottom-nav__item:active {
+  transform: scale(0.95);
+}
+
+.bottom-nav__item--active {
+  color: var(--primary-color);
+  background-color: rgba(26, 115, 232, 0.1);
+}
+
+.bottom-nav__item--active .bottom-nav__icon {
+  transform: scale(1.1);
+}
+
+.bottom-nav__icon-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: var(--space-xs);
+}
+
+.bottom-nav__icon {
+  font-size: 1.25rem;
+  line-height: 1;
+  transition: transform 0.2s ease-in-out;
+}
+
+.bottom-nav__label {
+  font-size: var(--font-size-xs);
+  font-weight: 500;
+  line-height: var(--line-height-tight);
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 60px;
+}
+
+/* Badge for notifications */
+.bottom-nav__badge {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  min-width: 16px;
+  height: 16px;
+  background-color: var(--error-color);
+  color: white;
+  font-size: 10px;
+  font-weight: bold;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 4px;
+  line-height: 1;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+/* Hover effects for devices that support it */
+@media (hover: hover) and (pointer: fine) {
+  .bottom-nav__item:hover:not(.bottom-nav__item--active) {
+    color: var(--text-secondary);
+    background-color: rgba(255, 255, 255, 0.05);
+  }
+  
+  .bottom-nav__item:hover .bottom-nav__icon {
+    transform: scale(1.05);
+  }
+}
+
+/* Hide on tablet and desktop */
+@media (min-width: 768px) {
+  .bottom-nav {
+    display: none;
+  }
+}
+
+/* Additional spacing for devices with home indicator (iPhone X+) */
+@supports (padding-bottom: env(safe-area-inset-bottom)) {
+  .bottom-nav {
+    padding-bottom: calc(var(--space-xs) + env(safe-area-inset-bottom));
+  }
+}
+
+/* Adjust for very small screens */
+@media (max-width: 320px) {
+  .bottom-nav__container {
+    padding: var(--space-xs);
+  }
+  
+  .bottom-nav__item {
+    padding: var(--space-xs);
+    min-width: 40px;
+  }
+  
+  .bottom-nav__label {
+    font-size: 10px;
+    max-width: 50px;
+  }
+  
+  .bottom-nav__icon {
+    font-size: 1.1rem;
+  }
+}
+
+/* Animation for nav item changes */
+.bottom-nav__item {
+  animation: navItemFadeIn 0.3s ease-out;
+}
+
+@keyframes navItemFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Accessibility improvements */
+@media (prefers-reduced-motion: reduce) {
+  .bottom-nav__item,
+  .bottom-nav__icon {
+    transition: none;
+    animation: none;
+  }
+  
+  .bottom-nav__item:active {
+    transform: none;
+  }
+}
+
+/* Dark mode adjustments (if needed) */
+@media (prefers-color-scheme: dark) {
+  .bottom-nav {
+    border-top-color: rgba(255, 255, 255, 0.1);
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .bottom-nav {
+    border-top-width: 2px;
+  }
+  
+  .bottom-nav__item--active {
+    background-color: var(--primary-color);
+    color: white;
+  }
+}

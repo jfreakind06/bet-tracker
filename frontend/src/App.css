@@ -1,42 +1,82 @@
+/* App-specific styles using our design system */
+
 #root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* App layout container */
+.app-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Main content area */
+.main-content {
+  flex: 1;
+  width: 100%;
+  padding-bottom: 80px; /* Space for bottom navigation on mobile */
+}
+
+/* Desktop layout adjustments */
+@media (min-width: 768px) {
+  .main-content {
+    padding-bottom: 0;
+  }
+  
+  .app-container {
+    max-width: var(--container-xl);
+    margin: 0 auto;
+    padding: var(--space-lg);
+  }
+}
+
+/* Auth pages specific styles */
+.auth-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-md);
+}
+
+.auth-card {
+  width: 100%;
+  max-width: 400px;
+}
+
+/* Loading state for app initialization */
+.app-loading {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+/* Error boundary styles */
+.error-boundary {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: var(--space-md);
+  padding: var(--space-md);
   text-align: center;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.error-boundary h1 {
+  color: var(--error-color);
+  font-size: var(--font-size-2xl);
+  margin-bottom: var(--space-md);
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
-}
-
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
+.error-boundary p {
+  color: var(--text-secondary);
+  max-width: 500px;
 }
