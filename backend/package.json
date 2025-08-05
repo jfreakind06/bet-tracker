@@ -4,7 +4,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "ts-node src/index.ts",
-    "build": "tsc",
+    "build": "tsc && cp knexfile.js dist/ && cp -r migrations dist/",
     "start": "npm run migrate:prod && node dist/index.js",
     "migrate": "knex migrate:latest",
     "migrate:prod": "NODE_ENV=production knex migrate:latest"

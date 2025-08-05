@@ -2,7 +2,7 @@
   "name": "bet-tracker",
   "version": "1.0.0",
   "scripts": {
-    "build": "cd backend && npm install --include=dev && npm run build",
+    "build": "cd backend && npm install --include=dev && npx tsc && cp knexfile.js dist/ && cp -r migrations dist/",
     "start": "cd backend && npm start"
   },
   "engines": {
