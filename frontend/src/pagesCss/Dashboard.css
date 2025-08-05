@@ -1,0 +1,558 @@
+/* Dashboard - Mobile First Design */
+.dashboard {
+  width: 100%;
+  padding: var(--space-md);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  animation: fadeIn 0.4s ease-in-out;
+}
+
+/* Update button styles */
+.dashboard__bet-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-sm);
+  flex-wrap: wrap;
+}
+
+.dashboard__update-btn {
+  background: linear-gradient(135deg, var(--primary-color), var(--primary-hover));
+  color: white;
+  border: none;
+  border-radius: var(--radius-md);
+  padding: var(--space-xs) var(--space-sm);
+  font-size: var(--font-size-xs);
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  min-height: var(--tap-target-min);
+  flex-shrink: 0;
+}
+
+.dashboard__update-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(26, 115, 232, 0.3);
+}
+
+.dashboard__update-btn:active {
+  transform: translateY(0);
+}
+
+.dashboard__bet-payout {
+  flex: 1;
+}
+
+/* Desktop layout */
+@media (min-width: 768px) {
+  .dashboard {
+    max-width: var(--container-lg);
+    margin: 0 auto;
+    padding: var(--space-xl);
+    gap: var(--space-2xl);
+  }
+}
+
+/* Header */
+.dashboard__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.dashboard__title {
+  font-size: 1.75rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+/* Add Bet Button */
+.dashboard__add-btn {
+  background-color: var(--primary-color);
+  color: white;
+  padding: var(--space-sm) var(--space-md);
+  border-radius: var(--radius-md);
+  font-size: var(--font-size-base);
+  font-weight: 500;
+  cursor: pointer;
+  border: none;
+  transition: all 0.2s ease-in-out;
+  min-height: var(--tap-target-min);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dashboard__add-btn:hover {
+  background-color: var(--primary-hover);
+  transform: translateY(-1px);
+}
+
+.dashboard__add-btn:focus {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
+}
+
+/* Tabs */
+.dashboard__tabs {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-sm);
+  flex-wrap: wrap;
+  padding: var(--space-sm);
+  background-color: var(--bg-secondary);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-color);
+}
+
+.dashboard__tab {
+  padding: var(--space-sm) var(--space-md);
+  border: none;
+  background: none;
+  color: var(--text-secondary);
+  font-weight: 500;
+  font-size: var(--font-size-sm);
+  cursor: pointer;
+  border-radius: var(--radius-md);
+  transition: all 0.2s ease-in-out;
+  min-height: var(--tap-target-min);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-transform: capitalize;
+}
+
+.dashboard__tab:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+  color: var(--text-primary);
+}
+
+.dashboard__tab--active {
+  background-color: var(--primary-color);
+  color: white;
+  box-shadow: var(--shadow-sm);
+}
+
+.dashboard__tab:focus {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
+}
+
+/* Bet List */
+.dashboard__list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.dashboard__list:empty::after {
+  content: 'No bets found for the selected filter.';
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: var(--space-2xl);
+  color: var(--text-secondary);
+  font-style: italic;
+  background-color: var(--bg-secondary);
+  border-radius: var(--radius-lg);
+  border: 2px dashed var(--border-color);
+}
+
+/* Bet Card */
+.dashboard__bet {
+  border: 1px solid var(--border-color);
+  border-left: 4px solid var(--text-muted);
+  background-color: var(--bg-secondary);
+  padding: var(--space-md);
+  border-radius: var(--radius-lg);
+  transition: all 0.2s ease-in-out;
+  box-shadow: var(--shadow-sm);
+}
+
+.dashboard__bet:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.dashboard__bet--win {
+  border-left-color: var(--success-color);
+  background-color: rgba(0, 255, 153, 0.05);
+}
+
+.dashboard__bet--loss {
+  border-left-color: var(--error-color);
+  background-color: rgba(220, 53, 69, 0.05);
+}
+
+.dashboard__bet--push {
+  border-left-color: var(--text-muted);
+  background-color: rgba(136, 136, 136, 0.05);
+}
+
+.dashboard__bet--open {
+  border-left-color: var(--warning-color);
+  background-color: rgba(255, 165, 0, 0.05);
+}
+
+.dashboard__bet-main {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.dashboard__bet-main span {
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+}
+
+.dashboard__bet-main strong {
+  font-size: var(--font-size-base);
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: var(--space-xs) 0;
+}
+
+.dashboard__bet-payout {
+  font-weight: 600;
+  margin-top: var(--space-sm);
+  color: var(--success-color);
+  font-size: var(--font-size-sm);
+}
+
+/* ROI Card */
+.dashboard__roi {
+  border: 1px solid var(--border-color);
+  padding: var(--space-lg);
+  border-radius: var(--radius-lg);
+  background-color: var(--bg-secondary);
+  box-shadow: var(--shadow-sm);
+}
+
+.dashboard__roi h2 {
+  margin-bottom: var(--space-md);
+  color: var(--text-primary);
+  font-size: var(--font-size-lg);
+  font-weight: 600;
+}
+
+.dashboard__select {
+  padding: var(--space-sm) var(--space-md);
+  font-size: var(--font-size-base);
+  border-radius: var(--radius-md);
+  background: var(--bg-tertiary);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+  margin-top: var(--space-sm);
+  margin-bottom: var(--space-md);
+  min-height: var(--tap-target-min);
+  transition: border-color 0.2s ease-in-out;
+}
+
+.dashboard__select:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(26, 115, 232, 0.1);
+}
+
+.dashboard__roi-values {
+  display: grid;
+  gap: var(--space-sm);
+}
+
+.dashboard__roi-values p {
+  margin: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space-sm);
+  background-color: var(--bg-tertiary);
+  border-radius: var(--radius-md);
+  font-size: var(--font-size-sm);
+}
+
+.dashboard__error {
+  color: var(--error-color);
+  font-size: var(--font-size-sm);
+  margin-top: var(--space-sm);
+  padding: var(--space-sm);
+  background-color: rgba(220, 53, 69, 0.1);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--error-color);
+}
+
+/* Modal */
+.dashboard__modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: var(--z-modal-backdrop);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  padding: var(--space-md);
+}
+
+.dashboard__modal {
+  background-color: var(--bg-secondary);
+  padding: var(--space-2xl);
+  border-radius: var(--radius-xl);
+  max-width: 500px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  animation: slideUp 0.3s ease;
+  position: relative;
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow-lg);
+}
+
+.dashboard__modal-close {
+  position: absolute;
+  top: var(--space-md);
+  right: var(--space-md);
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  width: var(--tap-target-min);
+  height: var(--tap-target-min);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--font-size-lg);
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.dashboard__modal-close:hover {
+  background-color: var(--error-color);
+  color: white;
+  transform: scale(1.05);
+}
+
+.dashboard__modal-close:focus {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
+}
+
+.dashboard__form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  margin-top: var(--space-lg);
+}
+
+.dashboard__form h3 {
+  color: var(--text-primary);
+  font-size: var(--font-size-xl);
+  font-weight: 600;
+  margin-bottom: var(--space-md);
+  text-align: center;
+}
+
+.dashboard__input,
+.dashboard__select {
+  padding: var(--space-sm) var(--space-md);
+  font-size: var(--font-size-base);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-color);
+  background-color: var(--bg-tertiary);
+  color: var(--text-primary);
+  min-height: var(--tap-target-min);
+  transition: border-color 0.2s ease-in-out;
+}
+
+.dashboard__input:focus,
+.dashboard__select:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(26, 115, 232, 0.1);
+}
+
+.dashboard__label {
+  font-weight: 600;
+  margin-bottom: var(--space-xs);
+  color: var(--text-primary);
+  font-size: var(--font-size-sm);
+}
+
+.dashboard__button {
+  background-color: var(--secondary-color);
+  color: white;
+  padding: var(--space-md) var(--space-lg);
+  font-size: var(--font-size-base);
+  font-weight: 500;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  border: none;
+  min-height: var(--tap-target-min);
+  transition: all 0.2s ease-in-out;
+  margin-top: var(--space-md);
+}
+
+.dashboard__button:hover {
+  background-color: var(--secondary-hover);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+
+.dashboard__button:focus {
+  outline: 2px solid var(--secondary-color);
+  outline-offset: 2px;
+}
+
+.dashboard__button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Enhanced Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Loading states */
+.dashboard__loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: var(--space-2xl);
+  color: var(--text-secondary);
+}
+
+.dashboard__empty-state {
+  text-align: center;
+  padding: var(--space-2xl);
+  color: var(--text-secondary);
+}
+
+.dashboard__empty-state h3 {
+  color: var(--text-primary);
+  margin-bottom: var(--space-md);
+}
+
+/* Accessibility improvements */
+@media (prefers-reduced-motion: reduce) {
+  .dashboard,
+  .dashboard__bet,
+  .dashboard__modal {
+    animation: none;
+    transition: none;
+  }
+
+  .dashboard__bet:hover,
+  .dashboard__add-btn:hover,
+  .dashboard__button:hover {
+    transform: none;
+  }
+}
+
+/* Mobile Responsive Adjustments */
+@media (max-width: 767px) {
+  .dashboard__header {
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--space-md);
+  }
+
+  .dashboard__tabs {
+    justify-content: flex-start;
+    gap: var(--space-xs);
+    padding: var(--space-xs);
+  }
+
+  .dashboard__tab {
+    font-size: var(--font-size-xs);
+    padding: var(--space-xs) var(--space-sm);
+  }
+
+  .dashboard__modal {
+    padding: var(--space-lg);
+    margin: var(--space-sm);
+    max-height: calc(100vh - var(--space-xl));
+  }
+
+  .dashboard__modal-overlay {
+    padding: var(--space-sm);
+  }
+
+  .dashboard__bet {
+    padding: var(--space-sm);
+  }
+
+  .dashboard__roi {
+    padding: var(--space-md);
+  }
+
+  /* Grid layout for ROI values on mobile */
+  .dashboard__roi-values {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Tablet adjustments */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .dashboard__roi-values {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Desktop enhancements */
+@media (min-width: 1024px) {
+  .dashboard__roi-values {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .dashboard__header {
+    align-items: center;
+  }
+
+  .dashboard__modal {
+    max-width: 600px;
+  }
+
+  .dashboard__bet-main {
+    flex-direction: row;
+    align-items: center;
+    gap: var(--space-lg);
+  }
+
+  .dashboard__bet-main span {
+    min-width: 100px;
+  }
+}
+
+/* Mobile responsive styles for update button */
+@media (max-width: 640px) {
+  .dashboard__bet-actions {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-xs);
+  }
+  
+  .dashboard__update-btn {
+    align-self: flex-end;
+    font-size: var(--font-size-xs);
+    padding: var(--space-xs);
+  }
+
+  .dashboard__bet-payout {
+    width: 100%;
+    margin-bottom: var(--space-xs);
+  }
+}

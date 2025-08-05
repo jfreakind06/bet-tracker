@@ -1,0 +1,424 @@
+/* Add Bet Form - Mobile First */
+.add-bet-form {
+  width: 100%;
+  max-width: 100%;
+}
+
+.add-bet-form__header {
+  margin-bottom: var(--space-lg);
+  text-align: center;
+}
+
+.add-bet-form__title {
+  font-size: var(--font-size-xl);
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: var(--space-md);
+}
+
+/* Step Indicator */
+.step-indicator {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-lg);
+}
+
+.step-indicator__item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-xs);
+  position: relative;
+}
+
+.step-indicator__item:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  top: 12px;
+  left: calc(100% + var(--space-xs));
+  width: var(--space-sm);
+  height: 2px;
+  background-color: var(--border-color);
+  transition: background-color 0.2s ease-in-out;
+}
+
+.step-indicator__item.completed::after {
+  background-color: var(--success-color);
+}
+
+.step-indicator__circle {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  background-color: var(--bg-tertiary);
+  border: 2px solid var(--border-color);
+  color: var(--text-secondary);
+  transition: all 0.2s ease-in-out;
+}
+
+.step-indicator__item.active .step-indicator__circle {
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+  color: white;
+}
+
+.step-indicator__item.completed .step-indicator__circle {
+  background-color: var(--success-color);
+  border-color: var(--success-color);
+  color: white;
+}
+
+.step-indicator__label {
+  font-size: var(--font-size-xs);
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.step-indicator__item.active .step-indicator__label {
+  color: var(--primary-color);
+}
+
+.step-indicator__item.completed .step-indicator__label {
+  color: var(--success-color);
+}
+
+/* Form Steps */
+.add-bet-form__form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.form-step {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+/* Form Groups */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-md);
+}
+
+@media (min-width: 480px) {
+  .form-row {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.form-label {
+  font-weight: 600;
+  color: var(--text-primary);
+  font-size: var(--font-size-sm);
+}
+
+/* Form Inputs */
+.form-input,
+.form-select,
+.form-textarea {
+  width: 100%;
+  min-height: var(--tap-target-min);
+  padding: var(--space-sm) var(--space-md);
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-normal);
+  color: var(--text-primary);
+  background-color: var(--bg-tertiary);
+  border: 2px solid var(--border-color);
+  border-radius: var(--radius-md);
+  transition: all 0.2s ease-in-out;
+}
+
+.form-input:focus,
+.form-select:focus,
+.form-textarea:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(26, 115, 232, 0.1);
+}
+
+.form-input.error,
+.form-select.error,
+.form-textarea.error {
+  border-color: var(--error-color);
+  box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.1);
+}
+
+.form-textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+/* Input with Symbol */
+.input-with-symbol {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input-symbol {
+  position: absolute;
+  left: var(--space-md);
+  color: var(--text-secondary);
+  font-weight: 500;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.input-with-symbol .form-input {
+  padding-left: calc(var(--space-md) + 20px);
+}
+
+/* Form Errors */
+.form-error {
+  color: var(--error-color);
+  font-size: var(--font-size-xs);
+  font-weight: 500;
+  margin-top: var(--space-xs);
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+}
+
+.form-error::before {
+  content: '⚠️';
+  font-size: 12px;
+}
+
+/* Result Options */
+.result-options {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-sm);
+}
+
+@media (min-width: 480px) {
+  .result-options {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.result-option {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-xs);
+  padding: var(--space-md);
+  background-color: var(--bg-tertiary);
+  border: 2px solid var(--border-color);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  min-height: var(--tap-target-min);
+}
+
+.result-option:hover {
+  background-color: var(--bg-secondary);
+  border-color: var(--primary-color);
+}
+
+.result-option.active {
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+  color: white;
+}
+
+.result-option__icon {
+  font-size: var(--font-size-lg);
+}
+
+.result-option__label {
+  font-size: var(--font-size-xs);
+  font-weight: 500;
+}
+
+/* Payout Preview */
+.payout-preview {
+  padding: var(--space-md);
+  background-color: var(--bg-tertiary);
+  border-radius: var(--radius-md);
+  border: 2px solid var(--success-color);
+  margin-top: var(--space-sm);
+}
+
+.payout-preview__content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--space-xs);
+}
+
+.payout-preview__label {
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.payout-preview__amount {
+  font-size: var(--font-size-lg);
+  font-weight: 600;
+  color: var(--success-color);
+}
+
+.payout-preview__profit {
+  font-size: var(--font-size-xs);
+  color: var(--text-muted);
+  text-align: center;
+}
+
+/* Form Navigation */
+.form-navigation {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-md);
+  padding-top: var(--space-lg);
+  border-top: 1px solid var(--border-color);
+  margin-top: var(--space-lg);
+}
+
+.form-navigation__left,
+.form-navigation__right {
+  display: flex;
+  gap: var(--space-sm);
+}
+
+.form-navigation__right {
+  margin-left: auto;
+}
+
+/* Mobile Optimizations */
+@media (max-width: 479px) {
+  .step-indicator {
+    gap: var(--space-xs);
+  }
+  
+  .step-indicator__circle {
+    width: 28px;
+    height: 28px;
+    font-size: var(--font-size-xs);
+  }
+  
+  .step-indicator__label {
+    font-size: 10px;
+  }
+  
+  .step-indicator__item:not(:last-child)::after {
+    width: var(--space-xs);
+    top: 10px;
+  }
+  
+  .form-navigation {
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+  
+  .form-navigation__left,
+  .form-navigation__right {
+    width: 100%;
+    justify-content: center;
+  }
+  
+  .form-navigation__right {
+    margin-left: 0;
+    flex-direction: column-reverse;
+  }
+  
+  .result-options {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .result-option {
+    padding: var(--space-sm);
+  }
+  
+  .result-option__icon {
+    font-size: var(--font-size-base);
+  }
+}
+
+/* Tablet and Desktop Enhancements */
+@media (min-width: 768px) {
+  .add-bet-form {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  
+  .step-indicator {
+    gap: var(--space-lg);
+  }
+  
+  .step-indicator__item:not(:last-child)::after {
+    width: var(--space-lg);
+  }
+  
+  .form-row {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* Loading State */
+.form-navigation button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Animation for step transitions */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Accessibility improvements */
+@media (prefers-reduced-motion: reduce) {
+  .form-step,
+  .step-indicator__circle,
+  .result-option {
+    animation: none;
+    transition: none;
+  }
+}
+
+/* Focus visible improvements */
+.result-option:focus-visible {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .form-input,
+  .form-select,
+  .form-textarea {
+    border-width: 3px;
+  }
+  
+  .step-indicator__circle {
+    border-width: 3px;
+  }
+  
+  .result-option {
+    border-width: 3px;
+  }
+}

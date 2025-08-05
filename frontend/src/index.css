@@ -1,0 +1,103 @@
+/* Import design system first */
+@import './styles/design-system.css';
+
+/* Additional global styles that complement the design system */
+
+/* Smooth scrolling for better mobile experience */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Remove focus outline for mouse users, keep for keyboard users */
+@media (pointer: fine) {
+  *:focus:not(:focus-visible) {
+    outline: none;
+  }
+}
+
+/* Prevent zoom on inputs in iOS Safari */
+@media screen and (max-width: 767px) {
+  input[type="text"],
+  input[type="email"],
+  input[type="password"],
+  input[type="number"],
+  input[type="tel"],
+  input[type="url"],
+  input[type="search"],
+  textarea,
+  select {
+    font-size: 16px;
+  }
+}
+
+/* Loading states */
+.loading {
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+.spinner {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--border-color);
+  border-radius: 50%;
+  border-top-color: var(--primary-color);
+  animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Toast notifications */
+.toast {
+  position: fixed;
+  top: var(--space-md);
+  right: var(--space-md);
+  left: var(--space-md);
+  z-index: var(--z-tooltip);
+  max-width: 400px;
+  margin: 0 auto;
+  padding: var(--space-md);
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  animation: slideDown 0.3s ease-out;
+}
+
+@media (min-width: 768px) {
+  .toast {
+    left: auto;
+    margin: 0;
+  }
+}
+
+.toast-success {
+  border-color: var(--success-color);
+  background-color: rgba(0, 255, 153, 0.1);
+}
+
+.toast-error {
+  border-color: var(--error-color);
+  background-color: rgba(220, 53, 69, 0.1);
+}
+
+.toast-warning {
+  border-color: var(--warning-color);
+  background-color: rgba(255, 165, 0, 0.1);
+}
+
+@keyframes slideDown {
+  from {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
