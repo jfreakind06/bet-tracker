@@ -401,6 +401,7 @@ body {
   scrollbar-width: none;
   -ms-overflow-style: none;
   scroll-behavior: smooth;
+  margin-bottom: 2rem;
 }
 
 .pill-container::-webkit-scrollbar {
@@ -474,6 +475,24 @@ body {
     padding: 10px 14px;
     font-size: 12px;
   }
+}
+
+/* Page Content Spacing */
+.page-section {
+  margin-bottom: 2rem;
+}
+
+.page-content {
+  margin-top: 2rem;
+}
+
+/* Card spacing improvements */
+.card {
+  margin-bottom: 1.5rem;
+}
+
+.card:last-child {
+  margin-bottom: 0;
 }
 
 /* Safe Area Support for Mobile */

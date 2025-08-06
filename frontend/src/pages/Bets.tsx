@@ -100,7 +100,7 @@ const Bets: React.FC = () => {
         
         <div className="p-4">
           {/* Filter Buttons - Mobile Friendly */}
-          <div className="mb-6">
+          <div className="page-section">
             {/* Scroll hint indicator */}
             <div className="flex items-center justify-between mb-2">
               <h3 className="text-sm font-medium text-gray-400">Filter by status</h3>
@@ -143,29 +143,30 @@ const Bets: React.FC = () => {
           </div>
 
           {/* Bets List */}
-          {filteredBets.length === 0 ? (
-            <div className="card">
-              <div className="card-body text-center py-8">
-                <p className="text-secondary">No bets found for the selected filter.</p>
+          <div className="page-content">
+            {filteredBets.length === 0 ? (
+              <div className="card">
+                <div className="card-body text-center py-8">
+                  <p className="text-secondary">No bets found for the selected filter.</p>
+                </div>
               </div>
-            </div>
-          ) : (
-            <div className="space-y-6">
-              {filteredBets.map(bet => (
-                <div key={bet.id} className="card">
-                  <div className="card-body">
-                    <div className="flex justify-between items-start mb-3">
-                      <div className="flex-1">
-                        <h3 className="font-semibold text-lg">{bet.description}</h3>
-                        <p className="text-sm text-secondary">{bet.sport} • {bet.betType}</p>
+            ) : (
+              <div className="space-y-8">
+                {filteredBets.map(bet => (
+                  <div key={bet.id} className="card">
+                    <div className="card-body">
+                      <div className="flex justify-between items-start mb-3">
+                        <div className="flex-1">
+                          <h3 className="font-semibold text-lg">{bet.description}</h3>
+                          <p className="text-sm text-secondary">{bet.sport} • {bet.betType}</p>
+                        </div>
+                        <div className="text-right">
+                          <p className={`font-semibold ${getResultColor(bet.result)}`}>
+                            {getResultDisplay(bet.result)}
+                          </p>
+                          <p className="text-sm text-secondary">{new Date(bet.date).toLocaleDateString()}</p>
+                        </div>
                       </div>
-                      <div className="text-right">
-                        <p className={`font-semibold ${getResultColor(bet.result)}`}>
-                          {getResultDisplay(bet.result)}
-                        </p>
-                        <p className="text-sm text-secondary">{new Date(bet.date).toLocaleDateString()}</p>
-                      </div>
-                    </div>
                     
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-3">
                       <div>
@@ -205,7 +206,8 @@ const Bets: React.FC = () => {
                 </div>
               ))}
             </div>
-          )}
+            )}
+          </div>
         </div>
       </div>
 

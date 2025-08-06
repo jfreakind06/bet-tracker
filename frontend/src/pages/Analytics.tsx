@@ -247,7 +247,7 @@ const Analytics: React.FC = () => {
 
         {/* Controls */}
         <div className="p-4">
-          <div className="space-y-4 mb-8">
+          <div className="page-section">
             {/* Tab Navigation */}
             <div className="space-y-2">
               <h3 className="text-sm font-medium text-gray-400">View</h3>
@@ -269,9 +269,9 @@ const Analytics: React.FC = () => {
           </div>
 
           {/* Content */}
-          <div className="space-y-8">
+          <div className="page-content space-y-10">
             {activeTab === 'overview' && (
-              <div className="space-y-6">
+              <div className="space-y-8">
                 {/* Key Stats */}
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                   <div className="card">
@@ -353,7 +353,7 @@ const Analytics: React.FC = () => {
             )}
 
             {activeTab === 'performance' && (
-              <div className="space-y-6">
+              <div className="space-y-8">
                 {sportPerformance.length > 0 ? (
                   <>
                     <div className="card">

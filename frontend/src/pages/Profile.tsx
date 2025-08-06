@@ -215,7 +215,7 @@ const Profile: React.FC = () => {
 
         {/* Tabs */}
         <div className="p-4">
-          <div className="flex justify-center mb-6">
+          <div className="page-section">
             <div className="flex gap-2 flex-wrap justify-center max-w-full">
                 <button
                   className={`filter-pill flex items-center gap-2 px-4 py-3 rounded-full text-sm font-medium whitespace-nowrap transition-all shadow-sm min-w-[100px] justify-center ${
@@ -248,7 +248,7 @@ const Profile: React.FC = () => {
           </div>
 
           {/* Tab Content */}
-          <div className="min-h-[400px] mt-8">
+          <div className="page-content min-h-[400px]">
             {activeTab === 'bankroll' && renderBankrollTab()}
             {activeTab === 'settings' && renderSettingsTab()}
             {activeTab === 'account' && renderAccountTab()}
