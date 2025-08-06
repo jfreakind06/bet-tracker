@@ -216,8 +216,8 @@ const Profile: React.FC = () => {
         {/* Tabs */}
         <div className="p-4">
           <div className="mb-6">
-            <div className="overflow-x-auto scrollbar-hide">
-              <div className="flex gap-2 pb-4 min-w-max justify-center">
+            <div className="overflow-x-auto scrollbar-hide w-full">
+              <div className="flex gap-2 pb-4 justify-center" style={{ width: 'max-content', margin: '0 auto' }}>
                 <button
                   className={`filter-pill flex items-center gap-2 px-4 py-3 rounded-full text-sm font-medium whitespace-nowrap transition-all shadow-sm min-w-[140px] justify-center ${
                     activeTab === 'bankroll' ? 'active' : ''
