@@ -1,0 +1,55 @@
+{
+  "hash": "b9bf2bc0",
+  "configHash": "10a2238f",
+  "lockfileHash": "76bc7349",
+  "browserHash": "c4203198",
+  "optimized": {
+    "react/jsx-dev-runtime": {
+      "src": "../../node_modules/react/jsx-dev-runtime.js",
+      "file": "react_jsx-dev-runtime.js",
+      "fileHash": "ad138ab0",
+      "needsInterop": true
+    },
+    "react": {
+      "src": "../../node_modules/react/index.js",
+      "file": "react.js",
+      "fileHash": "02ab1d09",
+      "needsInterop": true
+    },
+    "react-dom/client": {
+      "src": "../../node_modules/react-dom/client.js",
+      "file": "react-dom_client.js",
+      "fileHash": "b39d4366",
+      "needsInterop": true
+    },
+    "react-router-dom": {
+      "src": "../../node_modules/react-router-dom/dist/index.mjs",
+      "file": "react-router-dom.js",
+      "fileHash": "0a9394d9",
+      "needsInterop": false
+    },
+    "axios": {
+      "src": "../../node_modules/axios/index.js",
+      "file": "axios.js",
+      "fileHash": "cf55adc8",
+      "needsInterop": false
+    },
+    "recharts": {
+      "src": "../../node_modules/recharts/es6/index.js",
+      "file": "recharts.js",
+      "fileHash": "73bf3fd3",
+      "needsInterop": false
+    }
+  },
+  "chunks": {
+    "chunk-OAZAAUMI": {
+      "file": "chunk-OAZAAUMI.js"
+    },
+    "chunk-6GAV2S6I": {
+      "file": "chunk-6GAV2S6I.js"
+    },
+    "chunk-DC5AMYBS": {
+      "file": "chunk-DC5AMYBS.js"
+    }
+  }
+}

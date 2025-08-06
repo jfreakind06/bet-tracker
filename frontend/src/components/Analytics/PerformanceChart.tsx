@@ -144,7 +144,7 @@ const PerformanceChart: React.FC<PerformanceChartProps> = ({
                 { name: 'Wins' },
                 { name: 'Losses' },
                 ...(item.pushes > 0 ? [{ name: 'Pushes' }] : [])
-              ]).map((entry, index) => (
+              ]).map((_, index) => (
                 <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
               ))}
             </Pie>
