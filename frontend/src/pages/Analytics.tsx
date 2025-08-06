@@ -95,7 +95,10 @@ const Analytics: React.FC = () => {
     const sportStats: {[key: string]: {wins: number, losses: number, pushes: number, profit: number, wagered: number}} = {};
     
     filteredBets.forEach(bet => {
-      const sport = bet.sport || 'Other';
+      // Only include bets that have a defined sport, skip undefined/empty ones
+      const sport = bet.sport?.trim();
+      if (!sport) return;
+      
       if (!sportStats[sport]) {
         sportStats[sport] = {wins: 0, losses: 0, pushes: 0, profit: 0, wagered: 0};
       }
@@ -181,37 +184,41 @@ const Analytics: React.FC = () => {
 
   const renderTabButton = (tab: typeof activeTab, label: string, icon: string) => (
     <button
-      className={`px-3 py-2 rounded-md text-sm font-medium transition-all ${
+      className={`flex items-center gap-2 px-4 py-3 rounded-full text-sm font-medium whitespace-nowrap transition-all shadow-sm ${
         activeTab === tab
-          ? 'bg-primary-color text-white shadow-sm'
-          : 'text-secondary hover:text-primary hover:bg-tertiary'
+          ? 'bg-primary-color text-white shadow-md'
+          : 'bg-bg-secondary text-text-primary border border-border-color hover:bg-bg-tertiary hover:shadow-md'
       }`}
       onClick={() => setActiveTab(tab)}
     >
-      {icon} {label}
+      <span className="text-base">{icon}</span>
+      <span>{label}</span>
     </button>
   );
 
   const renderTimeFilter = () => (
-    <div className="flex gap-1 bg-secondary rounded-lg p-1 border border-border-color">
-      {[
-        { key: 'all', label: 'All Time' },
-        { key: '7d', label: '7 Days' },
-        { key: '30d', label: '30 Days' },
-        { key: '90d', label: '90 Days' }
-      ].map(filter => (
-        <button
-          key={filter.key}
-          className={`px-3 py-1 rounded-md text-xs font-medium transition-all ${
-            timeFilter === filter.key
-              ? 'bg-primary-color text-white shadow-sm'
-              : 'text-secondary hover:text-primary'
-          }`}
-          onClick={() => setTimeFilter(filter.key as typeof timeFilter)}
-        >
-          {filter.label}
-        </button>
-      ))}
+    <div className="overflow-x-auto scrollbar-hide">
+      <div className="flex gap-2 pb-2 min-w-max">
+        {[
+          { key: 'all', label: 'All Time', icon: '📅' },
+          { key: '7d', label: '7 Days', icon: '📊' },
+          { key: '30d', label: '30 Days', icon: '📈' },
+          { key: '90d', label: '90 Days', icon: '📉' }
+        ].map(filter => (
+          <button
+            key={filter.key}
+            className={`flex items-center gap-2 px-3 py-2 rounded-full text-xs font-medium whitespace-nowrap transition-all shadow-sm ${
+              timeFilter === filter.key
+                ? 'bg-primary-color text-white shadow-md'
+                : 'bg-bg-secondary text-text-primary border border-border-color hover:bg-bg-tertiary hover:shadow-md'
+            }`}
+            onClick={() => setTimeFilter(filter.key as typeof timeFilter)}
+          >
+            <span>{filter.icon}</span>
+            <span>{filter.label}</span>
+          </button>
+        ))}
+      </div>
     </div>
   );
 
@@ -244,17 +251,25 @@ const Analytics: React.FC = () => {
 
         {/* Controls */}
         <div className="p-4">
-          <div className="flex flex-col sm:flex-row justify-between items-center gap-4 mb-6">
+          <div className="space-y-4 mb-8">
             {/* Tab Navigation */}
-            <div className="flex gap-1 bg-secondary rounded-lg p-1 border border-border-color">
-              {renderTabButton('overview', 'Overview', '📊')}
-              {renderTabButton('performance', 'Performance', '🎯')}
-              {renderTabButton('trends', 'Trends', '📈')}
-              {renderTabButton('streaks', 'Streaks', '🔥')}
+            <div className="space-y-2">
+              <h3 className="text-sm font-medium text-text-secondary">View</h3>
+              <div className="overflow-x-auto scrollbar-hide">
+                <div className="flex gap-3 pb-2 min-w-max">
+                  {renderTabButton('overview', 'Overview', '📊')}
+                  {renderTabButton('performance', 'Performance', '🎯')}
+                  {renderTabButton('trends', 'Trends', '📈')}
+                  {renderTabButton('streaks', 'Streaks', '🔥')}
+                </div>
+              </div>
             </div>
 
             {/* Time Filter */}
-            {renderTimeFilter()}
+            <div className="space-y-2">
+              <h3 className="text-sm font-medium text-text-secondary">Time Period</h3>
+              {renderTimeFilter()}
+            </div>
           </div>
 
           {/* Content */}
@@ -308,7 +323,7 @@ const Analytics: React.FC = () => {
                 )}
 
                 {/* Performance Overview */}
-                {sportPerformance.length > 0 && (
+                {sportPerformance.length > 0 ? (
                   <div className="card">
                     <div className="card-header">
                       <h2 className="text-lg font-semibold">Performance by Sport</h2>
@@ -320,6 +335,21 @@ const Analytics: React.FC = () => {
                         title="Wins vs Losses by Sport"
                         height={300}
                       />
+                    </div>
+                  </div>
+                ) : (
+                  <div className="card">
+                    <div className="card-header">
+                      <h2 className="text-lg font-semibold">Performance by Sport</h2>
+                    </div>
+                    <div className="card-body text-center py-8">
+                      <div className="space-y-3">
+                        <div className="text-4xl">🏆</div>
+                        <p className="text-text-secondary">No sport-specific data available</p>
+                        <p className="text-sm text-text-muted">
+                          Add sport information to your bets to see performance breakdowns by sport
+                        </p>
+                      </div>
                     </div>
                   </div>
                 )}
