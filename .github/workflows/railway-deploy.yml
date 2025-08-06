@@ -1,0 +1,26 @@
+name: Deploy to Railway
+
+on:
+  push:
+    branches: [main]
+    paths: 
+      - 'backend/**'
+      - 'package.json'
+      - 'railway.toml'
+      - 'nixpacks.toml'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        
+      - name: Deploy to Railway
+        uses: railway-deploy/railway-deploy@v1
+        with:
+          service: ${{ secrets.RAILWAY_SERVICE_ID }}
+          environment: production
+        env:
+          RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}

@@ -72,7 +72,7 @@ const Dashboard: React.FC = () => {
       const res = await axios.get(`https://bet-tracker-production.up.railway.app/bets/roi?timeframe=${timeframe}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
-      setRoi(res.data as ROIData);
+      setRoi(res.data as RoiData);
       setError('');
     } catch (err) {
       console.error('Failed to fetch ROI', err);
