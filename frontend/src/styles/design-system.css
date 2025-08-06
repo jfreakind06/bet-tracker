@@ -420,15 +420,19 @@ body {
 }
 
 /* Enhanced Mobile Responsiveness for Pills */
-@media (max-width: 480px) {
+@media (max-width: 768px) {
   .filter-pill {
-    min-width: 100px;
-    padding: var(--space-sm) var(--space-md);
-    font-size: var(--font-size-xs);
+    min-width: 140px;
+    padding: 12px 16px;
+    font-size: 13px;
+    line-height: 1.2;
+    height: auto;
+    min-height: 44px;
   }
   
   .filter-pill span {
     display: inline-block;
+    white-space: nowrap;
   }
   
   /* Ensure horizontal scroll containers work smoothly */
@@ -441,6 +445,14 @@ body {
   
   .overflow-x-auto::-webkit-scrollbar {
     display: none; /* Chrome/Safari */
+  }
+}
+
+@media (max-width: 480px) {
+  .filter-pill {
+    min-width: 120px;
+    padding: 10px 14px;
+    font-size: 12px;
   }
 }
 

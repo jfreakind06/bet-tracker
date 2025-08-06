@@ -119,7 +119,7 @@ const Bets: React.FC = () => {
                 ].map(filterOption => (
                   <button
                     key={filterOption.key}
-                    className={`filter-pill flex items-center gap-2 px-4 py-3 rounded-full text-sm font-medium whitespace-nowrap transition-all shadow-sm min-w-[120px] justify-center ${
+                    className={`filter-pill flex items-center gap-2 px-4 py-3 rounded-full text-sm font-medium whitespace-nowrap transition-all shadow-sm min-w-[140px] justify-center ${
                       filter === filterOption.key
                         ? 'active'
                         : ''

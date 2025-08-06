@@ -184,7 +184,7 @@ const Analytics: React.FC = () => {
 
   const renderTabButton = (tab: typeof activeTab, label: string, icon: string) => (
     <button
-      className={`filter-pill flex items-center gap-2 px-4 py-3 rounded-full text-sm font-medium whitespace-nowrap transition-all shadow-sm min-w-[120px] justify-center ${
+      className={`filter-pill flex items-center gap-2 px-4 py-3 rounded-full text-sm font-medium whitespace-nowrap transition-all shadow-sm min-w-[140px] justify-center ${
         activeTab === tab ? 'active' : ''
       }`}
       onClick={() => setActiveTab(tab)}
@@ -205,7 +205,7 @@ const Analytics: React.FC = () => {
         ].map(filter => (
           <button
             key={filter.key}
-            className={`filter-pill flex items-center gap-2 px-4 py-3 rounded-full text-sm font-medium whitespace-nowrap transition-all shadow-sm min-w-[100px] justify-center ${
+            className={`filter-pill flex items-center gap-2 px-4 py-3 rounded-full text-sm font-medium whitespace-nowrap transition-all shadow-sm min-w-[120px] justify-center ${
               timeFilter === filter.key ? 'active' : ''
             }`}
             onClick={() => setTimeFilter(filter.key as typeof timeFilter)}

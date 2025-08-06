@@ -219,7 +219,7 @@ const Profile: React.FC = () => {
             <div className="overflow-x-auto scrollbar-hide">
               <div className="flex gap-2 pb-4 min-w-max justify-center">
                 <button
-                  className={`filter-pill flex items-center gap-2 px-4 py-3 rounded-full text-sm font-medium whitespace-nowrap transition-all shadow-sm min-w-[120px] justify-center ${
+                  className={`filter-pill flex items-center gap-2 px-4 py-3 rounded-full text-sm font-medium whitespace-nowrap transition-all shadow-sm min-w-[140px] justify-center ${
                     activeTab === 'bankroll' ? 'active' : ''
                   }`}
                   onClick={() => setActiveTab('bankroll')}
@@ -228,7 +228,7 @@ const Profile: React.FC = () => {
                   <span>Bankroll</span>
                 </button>
                 <button
-                  className={`filter-pill flex items-center gap-2 px-4 py-3 rounded-full text-sm font-medium whitespace-nowrap transition-all shadow-sm min-w-[120px] justify-center ${
+                  className={`filter-pill flex items-center gap-2 px-4 py-3 rounded-full text-sm font-medium whitespace-nowrap transition-all shadow-sm min-w-[140px] justify-center ${
                     activeTab === 'settings' ? 'active' : ''
                   }`}
                   onClick={() => setActiveTab('settings')}
@@ -237,7 +237,7 @@ const Profile: React.FC = () => {
                   <span>Settings</span>
                 </button>
                 <button
-                  className={`filter-pill flex items-center gap-2 px-4 py-3 rounded-full text-sm font-medium whitespace-nowrap transition-all shadow-sm min-w-[120px] justify-center ${
+                  className={`filter-pill flex items-center gap-2 px-4 py-3 rounded-full text-sm font-medium whitespace-nowrap transition-all shadow-sm min-w-[140px] justify-center ${
                     activeTab === 'account' ? 'active' : ''
                   }`}
                   onClick={() => setActiveTab('account')}
