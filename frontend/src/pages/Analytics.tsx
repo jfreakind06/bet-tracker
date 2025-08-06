@@ -29,10 +29,10 @@ const Analytics: React.FC = () => {
     const fetchBets = async () => {
       try {
         setLoading(true);
-        const res = await axios.get('http://localhost:5000/bets', {
+        const res = await axios.get('https://bet-tracker-production.up.railway.app/bets', {
           headers: { Authorization: `Bearer ${token}` },
         });
-        setBets(res.data);
+        setBets(res.data as Bet[]);
       } catch (err) {
         console.error('Failed to fetch bets', err);
       } finally {

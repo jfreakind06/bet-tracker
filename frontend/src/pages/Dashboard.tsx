@@ -59,7 +59,7 @@ const Dashboard: React.FC = () => {
       const res = await axios.get('http://localhost:5000/bets', {
         headers: { Authorization: `Bearer ${token}` },
       });
-      setBets(res.data);
+      setBets(res.data as Bet[]);
     } catch (err) {
       console.error('Failed to fetch bets', err);
     } finally {
@@ -69,10 +69,10 @@ const Dashboard: React.FC = () => {
 
   const fetchROI = async () => {
     try {
-      const res = await axios.get(`http://localhost:5000/bets/roi?timeframe=${timeframe}`, {
+      const res = await axios.get(`https://bet-tracker-production.up.railway.app/bets/roi?timeframe=${timeframe}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
-      setRoi(res.data);
+      setRoi(res.data as ROIData);
       setError('');
     } catch (err) {
       console.error('Failed to fetch ROI', err);
@@ -84,7 +84,7 @@ const Dashboard: React.FC = () => {
     try {
       setAddBetLoading(true);
       const res = await axios.post(
-        'http://localhost:5000/bets',
+        'https://bet-tracker-production.up.railway.app/bets',
         {
           date: formData.date,
           description: formData.description,
@@ -101,7 +101,7 @@ const Dashboard: React.FC = () => {
           headers: { Authorization: `Bearer ${token}` },
         }
       );
-      setBets([res.data, ...bets]);
+      setBets([res.data as Bet, ...bets]);
       setModalOpen(false);
       // Refresh ROI data after adding a bet
       fetchROI();
