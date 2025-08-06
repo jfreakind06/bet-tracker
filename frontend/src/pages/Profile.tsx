@@ -173,7 +173,6 @@ const Profile: React.FC = () => {
             </div>
           </div>
         </div>
-      </div>
         
         <div className="card">
           <div className="card-header">
