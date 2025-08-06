@@ -9,11 +9,18 @@ export async function login(email: string, password: string) {
   return res.json();
 }
 
-export async function register(email: string, password: string) {
+export async function register(email: string, password: string, username: string) {
   const res = await fetch(`${API_BASE}/auth/register`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ email, password }),
+    body: JSON.stringify({ email, password, username }),
+  });
+  return res.json();
+}
+
+export async function checkUsernameAvailability(username: string) {
+  const res = await fetch(`${API_BASE}/auth/check-username/${encodeURIComponent(username)}`, {
+    method: 'GET',
   });
   return res.json();
 }

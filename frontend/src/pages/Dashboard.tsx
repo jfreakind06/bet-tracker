@@ -239,7 +239,20 @@ const Dashboard: React.FC = () => {
       {/* Header with Welcome Message */}
       <header className="dashboard__header">
         <div>
-          <h1 className="dashboard__title">Welcome Back!</h1>
+          <h1 className="dashboard__title">
+            Welcome Back{(() => {
+              try {
+                const user = localStorage.getItem('user');
+                if (user) {
+                  const userData = JSON.parse(user);
+                  return userData.username ? `, ${userData.username}!` : '!';
+                }
+                return '!';
+              } catch {
+                return '!';
+              }
+            })()}
+          </h1>
           <p className="text-secondary text-sm">
             Track your betting performance and grow your bankroll
           </p>
