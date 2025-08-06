@@ -51,7 +51,6 @@ const Dashboard: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const [addBetLoading, setAddBetLoading] = useState<boolean>(false);
 
-  const token = localStorage.getItem('token');
 
   const fetchBets = async () => {
     try {
@@ -126,7 +125,7 @@ const Dashboard: React.FC = () => {
     setUpdateModalOpen(true);
   };
 
-  const handleBetUpdated = async (updatedBet: Bet) => {
+  const handleBetUpdated = async () => {
     try {
       // Refresh all data to ensure everything is in sync
       await fetchBets();
