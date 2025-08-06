@@ -21,7 +21,6 @@ const Bets: React.FC = () => {
   const [updateModalOpen, setUpdateModalOpen] = useState(false);
   const [filter, setFilter] = useState<'all' | 'pending' | 'win' | 'loss' | 'push'>('all');
   
-  const token = localStorage.getItem('token');
 
   useEffect(() => {
     fetchBets();
@@ -197,15 +196,17 @@ const Bets: React.FC = () => {
       </div>
 
       {/* Update Bet Modal */}
-      <UpdateBetModal
-        isOpen={updateModalOpen}
-        onClose={() => {
-          setUpdateModalOpen(false);
-          setSelectedBet(null);
-        }}
-        bet={selectedBet}
-        onUpdate={handleBetUpdated}
-      />
+      {selectedBet && (
+        <UpdateBetModal
+          isOpen={updateModalOpen}
+          onClose={() => {
+            setUpdateModalOpen(false);
+            setSelectedBet(null);
+          }}
+          bet={selectedBet}
+          onUpdate={handleBetUpdated}
+        />
+      )}
     </div>
   );
 };
