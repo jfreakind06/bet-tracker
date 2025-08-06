@@ -21,7 +21,7 @@ const Analytics: React.FC = () => {
   const [bets, setBets] = useState<Bet[]>([]);
   const [loading, setLoading] = useState(true);
   const [activeTab, setActiveTab] = useState<'overview' | 'performance' | 'trends' | 'streaks'>('overview');
-  const [timeFilter, setTimeFilter] = useState<'all' | '7d' | '30d' | '90d'>('all');
+  // const [timeFilter, setTimeFilter] = useState<'all' | '7d' | '30d' | '90d'>('all');
 
   const token = localStorage.getItem('token');
 
@@ -47,18 +47,18 @@ const Analytics: React.FC = () => {
     }
   }, [token]);
 
-  // Filter bets based on time filter
-  const getFilteredBets = () => {
-    if (timeFilter === 'all') return bets;
+  // Filter bets based on time filter - currently disabled
+  // const getFilteredBets = () => {
+  //   if (timeFilter === 'all') return bets;
     
-    const now = new Date();
-    const daysBack = parseInt(timeFilter.replace('d', ''));
-    const cutoffDate = new Date(now.getTime() - (daysBack * 24 * 60 * 60 * 1000));
+  //   const now = new Date();
+  //   const daysBack = parseInt(timeFilter.replace('d', ''));
+  //   const cutoffDate = new Date(now.getTime() - (daysBack * 24 * 60 * 60 * 1000));
     
-    return bets.filter(bet => new Date(bet.date) >= cutoffDate);
-  };
+  //   return bets.filter(bet => new Date(bet.date) >= cutoffDate);
+  // };
 
-  const filteredBets = getFilteredBets();
+  const filteredBets = bets;
 
   // Generate bankroll data
   const generateBankrollData = () => {
@@ -184,10 +184,8 @@ const Analytics: React.FC = () => {
 
   const renderTabButton = (tab: typeof activeTab, label: string, icon: string) => (
     <button
-      className={`flex items-center gap-2 px-3 py-2 rounded-full text-sm font-medium whitespace-nowrap transition-all shadow-sm ${
-        activeTab === tab
-          ? 'bg-blue-600 text-white shadow-md'
-          : 'bg-gray-800 text-gray-200 border border-gray-600 hover:bg-gray-700 hover:shadow-md'
+      className={`filter-pill flex items-center gap-2 px-4 py-3 rounded-full text-sm font-medium whitespace-nowrap transition-all shadow-sm min-w-[140px] justify-center ${
+        activeTab === tab ? 'active' : ''
       }`}
       onClick={() => setActiveTab(tab)}
     >
@@ -196,31 +194,29 @@ const Analytics: React.FC = () => {
     </button>
   );
 
-  const renderTimeFilter = () => (
-    <div className="overflow-x-auto scrollbar-hide">
-      <div className="flex gap-2 pb-2 min-w-max">
-        {[
-          { key: 'all', label: 'All Time', icon: '📅' },
-          { key: '7d', label: '7 Days', icon: '📊' },
-          { key: '30d', label: '30 Days', icon: '📈' },
-          { key: '90d', label: '90 Days', icon: '📉' }
-        ].map(filter => (
-          <button
-            key={filter.key}
-            className={`flex items-center gap-2 px-3 py-2 rounded-full text-xs font-medium whitespace-nowrap transition-all shadow-sm ${
-              timeFilter === filter.key
-                ? 'bg-blue-600 text-white shadow-md'
-                : 'bg-gray-800 text-gray-200 border border-gray-600 hover:bg-gray-700 hover:shadow-md'
-            }`}
-            onClick={() => setTimeFilter(filter.key as typeof timeFilter)}
-          >
-            <span>{filter.icon}</span>
-            <span>{filter.label}</span>
-          </button>
-        ))}
-      </div>
-    </div>
-  );
+  // const renderTimeFilter = () => (
+  //   <div className="pill-container">
+  //     <div className="pill-scroll-content">
+  //       {[
+  //         { key: 'all', label: 'All Time', icon: '📅' },
+  //         { key: '7d', label: '7 Days', icon: '📊' },
+  //         { key: '30d', label: '30 Days', icon: '📈' },
+  //         { key: '90d', label: '90 Days', icon: '📉' }
+  //       ].map(filter => (
+  //         <button
+  //           key={filter.key}
+  //           className={`filter-pill flex items-center gap-2 px-4 py-3 rounded-full text-sm font-medium whitespace-nowrap transition-all shadow-sm min-w-[120px] justify-center ${
+  //             timeFilter === filter.key ? 'active' : ''
+  //           }`}
+  //           onClick={() => setTimeFilter(filter.key as typeof timeFilter)}
+  //         >
+  //           <span>{filter.icon}</span>
+  //           <span>{filter.label}</span>
+  //         </button>
+  //       ))}
+  //     </div>
+  //   </div>
+  // );
 
   if (loading) {
     return (
@@ -251,12 +247,12 @@ const Analytics: React.FC = () => {
 
         {/* Controls */}
         <div className="p-4">
-          <div className="space-y-4 mb-8">
+          <div className="page-section">
             {/* Tab Navigation */}
             <div className="space-y-2">
               <h3 className="text-sm font-medium text-gray-400">View</h3>
-              <div className="overflow-x-auto scrollbar-hide">
-                <div className="flex gap-2 pb-2 min-w-max">
+              <div className="pill-container">
+                <div className="pill-scroll-content">
                   {renderTabButton('overview', 'Overview', '📊')}
                   {renderTabButton('performance', 'Performance', '🎯')}
                   {renderTabButton('trends', 'Trends', '📈')}
@@ -266,18 +262,18 @@ const Analytics: React.FC = () => {
             </div>
 
             {/* Time Filter */}
-            <div className="space-y-2">
+            {/* <div className="space-y-2">
               <h3 className="text-sm font-medium text-gray-400">Time Period</h3>
               {renderTimeFilter()}
-            </div>
+            </div> */}
           </div>
 
           {/* Content */}
-          <div className="space-y-6">
+          <div className="page-content space-y-10">
             {activeTab === 'overview' && (
-              <div className="space-y-6">
+              <div className="space-y-8">
                 {/* Key Stats */}
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div className="stats-grid">
                   <div className="card">
                     <div className="card-body text-center">
                       <p className="text-2xl font-bold text-primary">{filteredBets.length}</p>
@@ -357,7 +353,7 @@ const Analytics: React.FC = () => {
             )}
 
             {activeTab === 'performance' && (
-              <div className="space-y-6">
+              <div className="space-y-8">
                 {sportPerformance.length > 0 ? (
                   <>
                     <div className="card">

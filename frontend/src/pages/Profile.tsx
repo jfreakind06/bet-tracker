@@ -32,7 +32,7 @@ const Profile: React.FC = () => {
   );
 
   const renderSettingsTab = () => (
-    <div className="space-y-6">
+    <div className="space-y-8">
       <div className="card">
         <div className="card-header">
           <h2 className="text-lg font-semibold">Betting Preferences</h2>
@@ -136,7 +136,7 @@ const Profile: React.FC = () => {
     const userInfo = getUserInfo();
 
     return (
-      <div className="space-y-6">
+      <div className="space-y-8">
         <div className="card">
           <div className="card-header">
             <h2 className="text-lg font-semibold">Account Information</h2>
@@ -215,43 +215,40 @@ const Profile: React.FC = () => {
 
         {/* Tabs */}
         <div className="p-4">
-          <div className="flex justify-center mb-6">
-            <div className="flex bg-secondary rounded-lg p-1 border border-border-color">
-              <button
-                className={`px-4 py-2 rounded-md text-sm font-medium transition-all ${
-                  activeTab === 'bankroll'
-                    ? 'bg-primary-color text-white shadow-sm'
-                    : 'text-secondary hover:text-primary'
-                }`}
-                onClick={() => setActiveTab('bankroll')}
-              >
-                💰 Bankroll
-              </button>
-              <button
-                className={`px-4 py-2 rounded-md text-sm font-medium transition-all ${
-                  activeTab === 'settings'
-                    ? 'bg-primary-color text-white shadow-sm'
-                    : 'text-secondary hover:text-primary'
-                }`}
-                onClick={() => setActiveTab('settings')}
-              >
-                ⚙️ Settings
-              </button>
-              <button
-                className={`px-4 py-2 rounded-md text-sm font-medium transition-all ${
-                  activeTab === 'account'
-                    ? 'bg-primary-color text-white shadow-sm'
-                    : 'text-secondary hover:text-primary'
-                }`}
-                onClick={() => setActiveTab('account')}
-              >
-                👤 Account
-              </button>
+          <div className="page-section">
+            <div className="flex gap-2 flex-wrap justify-center max-w-full">
+                <button
+                  className={`filter-pill flex items-center gap-2 px-4 py-3 rounded-full text-sm font-medium whitespace-nowrap transition-all shadow-sm min-w-[100px] justify-center ${
+                    activeTab === 'bankroll' ? 'active' : ''
+                  }`}
+                  onClick={() => setActiveTab('bankroll')}
+                >
+                  <span className="text-base">💰</span>
+                  <span>Bankroll</span>
+                </button>
+                <button
+                  className={`filter-pill flex items-center gap-2 px-4 py-3 rounded-full text-sm font-medium whitespace-nowrap transition-all shadow-sm min-w-[100px] justify-center ${
+                    activeTab === 'settings' ? 'active' : ''
+                  }`}
+                  onClick={() => setActiveTab('settings')}
+                >
+                  <span className="text-base">⚙️</span>
+                  <span>Settings</span>
+                </button>
+                <button
+                  className={`filter-pill flex items-center gap-2 px-4 py-3 rounded-full text-sm font-medium whitespace-nowrap transition-all shadow-sm min-w-[100px] justify-center ${
+                    activeTab === 'account' ? 'active' : ''
+                  }`}
+                  onClick={() => setActiveTab('account')}
+                >
+                  <span className="text-base">👤</span>
+                  <span>Account</span>
+                </button>
             </div>
           </div>
 
           {/* Tab Content */}
-          <div className="min-h-[400px]">
+          <div className="page-content min-h-[400px]">
             {activeTab === 'bankroll' && renderBankrollTab()}
             {activeTab === 'settings' && renderSettingsTab()}
             {activeTab === 'account' && renderAccountTab()}
