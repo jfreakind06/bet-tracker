@@ -273,7 +273,7 @@ const Analytics: React.FC = () => {
             {activeTab === 'overview' && (
               <div className="space-y-8">
                 {/* Key Stats */}
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div className="stats-grid">
                   <div className="card">
                     <div className="card-body text-center">
                       <p className="text-2xl font-bold text-primary">{filteredBets.length}</p>

@@ -495,6 +495,32 @@ body {
   margin-bottom: 0;
 }
 
+/* Stats card height consistency */
+.stats-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.stats-grid .card {
+  height: 100%;
+  margin-bottom: 0;
+}
+
+.stats-grid .card-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 100px;
+  padding: 1.5rem 1rem;
+}
+
+@media (min-width: 768px) {
+  .stats-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
 /* Safe Area Support for Mobile */
 @supports (padding-top: env(safe-area-inset-top)) {
   .safe-area-top {
