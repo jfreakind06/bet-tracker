@@ -108,8 +108,8 @@ const Bets: React.FC = () => {
                 Swipe to see more →
               </div>
             </div>
-            <div className="overflow-x-auto scrollbar-hide w-full">
-              <div className="flex gap-2 pb-4 px-4" style={{ width: 'max-content' }}>
+            <div className="pill-container">
+              <div className="pill-scroll-content">
                 {[
                   { key: 'all', label: 'All Bets', icon: '📊' },
                   { key: 'pending', label: 'Pending', icon: '⏳' },
