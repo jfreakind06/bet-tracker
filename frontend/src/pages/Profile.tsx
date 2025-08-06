@@ -32,7 +32,7 @@ const Profile: React.FC = () => {
   );
 
   const renderSettingsTab = () => (
-    <div className="space-y-6">
+    <div className="space-y-8">
       <div className="card">
         <div className="card-header">
           <h2 className="text-lg font-semibold">Betting Preferences</h2>
@@ -136,7 +136,7 @@ const Profile: React.FC = () => {
     const userInfo = getUserInfo();
 
     return (
-      <div className="space-y-6">
+      <div className="space-y-8">
         <div className="card">
           <div className="card-header">
             <h2 className="text-lg font-semibold">Account Information</h2>
@@ -248,7 +248,7 @@ const Profile: React.FC = () => {
           </div>
 
           {/* Tab Content */}
-          <div className="min-h-[400px]">
+          <div className="min-h-[400px] mt-8">
             {activeTab === 'bankroll' && renderBankrollTab()}
             {activeTab === 'settings' && renderSettingsTab()}
             {activeTab === 'account' && renderAccountTab()}

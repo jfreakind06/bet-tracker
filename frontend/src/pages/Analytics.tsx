@@ -21,7 +21,7 @@ const Analytics: React.FC = () => {
   const [bets, setBets] = useState<Bet[]>([]);
   const [loading, setLoading] = useState(true);
   const [activeTab, setActiveTab] = useState<'overview' | 'performance' | 'trends' | 'streaks'>('overview');
-  const [timeFilter, setTimeFilter] = useState<'all' | '7d' | '30d' | '90d'>('all');
+  // const [timeFilter, setTimeFilter] = useState<'all' | '7d' | '30d' | '90d'>('all');
 
   const token = localStorage.getItem('token');
 
@@ -47,18 +47,18 @@ const Analytics: React.FC = () => {
     }
   }, [token]);
 
-  // Filter bets based on time filter
-  const getFilteredBets = () => {
-    if (timeFilter === 'all') return bets;
+  // Filter bets based on time filter - currently disabled
+  // const getFilteredBets = () => {
+  //   if (timeFilter === 'all') return bets;
     
-    const now = new Date();
-    const daysBack = parseInt(timeFilter.replace('d', ''));
-    const cutoffDate = new Date(now.getTime() - (daysBack * 24 * 60 * 60 * 1000));
+  //   const now = new Date();
+  //   const daysBack = parseInt(timeFilter.replace('d', ''));
+  //   const cutoffDate = new Date(now.getTime() - (daysBack * 24 * 60 * 60 * 1000));
     
-    return bets.filter(bet => new Date(bet.date) >= cutoffDate);
-  };
+  //   return bets.filter(bet => new Date(bet.date) >= cutoffDate);
+  // };
 
-  const filteredBets = getFilteredBets();
+  const filteredBets = bets;
 
   // Generate bankroll data
   const generateBankrollData = () => {
@@ -194,29 +194,29 @@ const Analytics: React.FC = () => {
     </button>
   );
 
-  const renderTimeFilter = () => (
-    <div className="pill-container">
-      <div className="pill-scroll-content">
-        {[
-          { key: 'all', label: 'All Time', icon: '📅' },
-          { key: '7d', label: '7 Days', icon: '📊' },
-          { key: '30d', label: '30 Days', icon: '📈' },
-          { key: '90d', label: '90 Days', icon: '📉' }
-        ].map(filter => (
-          <button
-            key={filter.key}
-            className={`filter-pill flex items-center gap-2 px-4 py-3 rounded-full text-sm font-medium whitespace-nowrap transition-all shadow-sm min-w-[120px] justify-center ${
-              timeFilter === filter.key ? 'active' : ''
-            }`}
-            onClick={() => setTimeFilter(filter.key as typeof timeFilter)}
-          >
-            <span>{filter.icon}</span>
-            <span>{filter.label}</span>
-          </button>
-        ))}
-      </div>
-    </div>
-  );
+  // const renderTimeFilter = () => (
+  //   <div className="pill-container">
+  //     <div className="pill-scroll-content">
+  //       {[
+  //         { key: 'all', label: 'All Time', icon: '📅' },
+  //         { key: '7d', label: '7 Days', icon: '📊' },
+  //         { key: '30d', label: '30 Days', icon: '📈' },
+  //         { key: '90d', label: '90 Days', icon: '📉' }
+  //       ].map(filter => (
+  //         <button
+  //           key={filter.key}
+  //           className={`filter-pill flex items-center gap-2 px-4 py-3 rounded-full text-sm font-medium whitespace-nowrap transition-all shadow-sm min-w-[120px] justify-center ${
+  //             timeFilter === filter.key ? 'active' : ''
+  //           }`}
+  //           onClick={() => setTimeFilter(filter.key as typeof timeFilter)}
+  //         >
+  //           <span>{filter.icon}</span>
+  //           <span>{filter.label}</span>
+  //         </button>
+  //       ))}
+  //     </div>
+  //   </div>
+  // );
 
   if (loading) {
     return (
@@ -262,14 +262,14 @@ const Analytics: React.FC = () => {
             </div>
 
             {/* Time Filter */}
-            <div className="space-y-2">
+            {/* <div className="space-y-2">
               <h3 className="text-sm font-medium text-gray-400">Time Period</h3>
               {renderTimeFilter()}
-            </div>
+            </div> */}
           </div>
 
           {/* Content */}
-          <div className="space-y-6">
+          <div className="space-y-8">
             {activeTab === 'overview' && (
               <div className="space-y-6">
                 {/* Key Stats */}
