@@ -150,7 +150,7 @@ const Bets: React.FC = () => {
               </div>
             </div>
           ) : (
-            <div className="space-y-4">
+            <div className="space-y-6">
               {filteredBets.map(bet => (
                 <div key={bet.id} className="card">
                   <div className="card-body">
