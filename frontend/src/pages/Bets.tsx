@@ -99,33 +99,47 @@ const Bets: React.FC = () => {
         </header>
         
         <div className="p-4">
-          {/* Filter Buttons */}
-          <div className="flex flex-wrap gap-2 mb-6">
-            {[
-              { key: 'all', label: 'All Bets' },
-              { key: 'pending', label: 'Pending' },
-              { key: 'win', label: 'Wins' },
-              { key: 'loss', label: 'Losses' },
-              { key: 'push', label: 'Pushes' }
-            ].map(filterOption => (
-              <button
-                key={filterOption.key}
-                className={`px-3 py-2 rounded-md text-sm font-medium transition-all ${
-                  filter === filterOption.key
-                    ? 'bg-primary-color text-white'
-                    : 'bg-secondary text-secondary hover:bg-tertiary'
-                }`}
-                onClick={() => setFilter(filterOption.key as typeof filter)}
-              >
-                {filterOption.label} ({
-                  filterOption.key === 'all' 
-                    ? bets.length 
-                    : filterOption.key === 'pending'
-                      ? bets.filter(b => !b.result || b.result === '').length
-                      : bets.filter(b => b.result === filterOption.key).length
-                })
-              </button>
-            ))}
+          {/* Filter Buttons - Mobile Friendly */}
+          <div className="mb-6">
+            {/* Scroll hint indicator */}
+            <div className="flex items-center justify-between mb-2">
+              <h3 className="text-sm font-medium text-gray-400">Filter by status</h3>
+              <div className="text-xs text-gray-500 sm:hidden">
+                Swipe to see more →
+              </div>
+            </div>
+            <div className="overflow-x-auto scrollbar-hide">
+              <div className="flex gap-2 pb-4 min-w-max px-1">
+                {[
+                  { key: 'all', label: 'All Bets', icon: '📊' },
+                  { key: 'pending', label: 'Pending', icon: '⏳' },
+                  { key: 'win', label: 'Wins', icon: '✅' },
+                  { key: 'loss', label: 'Losses', icon: '❌' },
+                  { key: 'push', label: 'Pushes', icon: '↔️' }
+                ].map(filterOption => (
+                  <button
+                    key={filterOption.key}
+                    className={`flex items-center gap-2 px-3 py-2 rounded-full text-sm font-medium whitespace-nowrap transition-all shadow-sm ${
+                      filter === filterOption.key
+                        ? 'bg-blue-600 text-white shadow-md'
+                        : 'bg-gray-800 text-gray-200 border border-gray-600 hover:bg-gray-700 hover:shadow-md'
+                    }`}
+                    onClick={() => setFilter(filterOption.key as typeof filter)}
+                  >
+                    <span className="text-base">{filterOption.icon}</span>
+                    <span>
+                      {filterOption.label} ({
+                        filterOption.key === 'all' 
+                          ? bets.length 
+                          : filterOption.key === 'pending'
+                            ? bets.filter(b => !b.result || b.result === '').length
+                            : bets.filter(b => b.result === filterOption.key).length
+                      })
+                    </span>
+                  </button>
+                ))}
+              </div>
+            </div>
           </div>
 
           {/* Bets List */}

@@ -367,7 +367,7 @@ const AddBetForm: React.FC<AddBetFormProps> = ({ onSubmit, onCancel, loading = f
             {currentStep > 1 && (
               <button
                 type="button"
-                className="btn btn-secondary"
+                className="btn btn-primary"
                 onClick={prevStep}
               >
                 ← Previous
