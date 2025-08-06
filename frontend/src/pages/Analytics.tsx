@@ -184,10 +184,10 @@ const Analytics: React.FC = () => {
 
   const renderTabButton = (tab: typeof activeTab, label: string, icon: string) => (
     <button
-      className={`flex items-center gap-2 px-4 py-3 rounded-full text-sm font-medium whitespace-nowrap transition-all shadow-sm ${
+      className={`flex items-center gap-2 px-3 py-2 rounded-full text-sm font-medium whitespace-nowrap transition-all shadow-sm ${
         activeTab === tab
-          ? 'bg-primary-color text-white shadow-md'
-          : 'bg-bg-secondary text-text-primary border border-border-color hover:bg-bg-tertiary hover:shadow-md'
+          ? 'bg-blue-600 text-white shadow-md'
+          : 'bg-gray-800 text-gray-200 border border-gray-600 hover:bg-gray-700 hover:shadow-md'
       }`}
       onClick={() => setActiveTab(tab)}
     >
@@ -209,8 +209,8 @@ const Analytics: React.FC = () => {
             key={filter.key}
             className={`flex items-center gap-2 px-3 py-2 rounded-full text-xs font-medium whitespace-nowrap transition-all shadow-sm ${
               timeFilter === filter.key
-                ? 'bg-primary-color text-white shadow-md'
-                : 'bg-bg-secondary text-text-primary border border-border-color hover:bg-bg-tertiary hover:shadow-md'
+                ? 'bg-blue-600 text-white shadow-md'
+                : 'bg-gray-800 text-gray-200 border border-gray-600 hover:bg-gray-700 hover:shadow-md'
             }`}
             onClick={() => setTimeFilter(filter.key as typeof timeFilter)}
           >
@@ -254,9 +254,9 @@ const Analytics: React.FC = () => {
           <div className="space-y-4 mb-8">
             {/* Tab Navigation */}
             <div className="space-y-2">
-              <h3 className="text-sm font-medium text-text-secondary">View</h3>
+              <h3 className="text-sm font-medium text-gray-400">View</h3>
               <div className="overflow-x-auto scrollbar-hide">
-                <div className="flex gap-3 pb-2 min-w-max">
+                <div className="flex gap-2 pb-2 min-w-max">
                   {renderTabButton('overview', 'Overview', '📊')}
                   {renderTabButton('performance', 'Performance', '🎯')}
                   {renderTabButton('trends', 'Trends', '📈')}
@@ -267,7 +267,7 @@ const Analytics: React.FC = () => {
 
             {/* Time Filter */}
             <div className="space-y-2">
-              <h3 className="text-sm font-medium text-text-secondary">Time Period</h3>
+              <h3 className="text-sm font-medium text-gray-400">Time Period</h3>
               {renderTimeFilter()}
             </div>
           </div>

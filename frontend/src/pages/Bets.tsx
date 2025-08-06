@@ -103,13 +103,13 @@ const Bets: React.FC = () => {
           <div className="mb-6">
             {/* Scroll hint indicator */}
             <div className="flex items-center justify-between mb-2">
-              <h3 className="text-sm font-medium text-text-secondary">Filter by status</h3>
-              <div className="text-xs text-text-muted sm:hidden">
+              <h3 className="text-sm font-medium text-gray-400">Filter by status</h3>
+              <div className="text-xs text-gray-500 sm:hidden">
                 Swipe to see more →
               </div>
             </div>
             <div className="overflow-x-auto scrollbar-hide">
-              <div className="flex gap-3 pb-4 min-w-max px-1">
+              <div className="flex gap-2 pb-4 min-w-max px-1">
                 {[
                   { key: 'all', label: 'All Bets', icon: '📊' },
                   { key: 'pending', label: 'Pending', icon: '⏳' },
@@ -119,10 +119,10 @@ const Bets: React.FC = () => {
                 ].map(filterOption => (
                   <button
                     key={filterOption.key}
-                    className={`flex items-center gap-2 px-4 py-3 rounded-full text-sm font-medium whitespace-nowrap transition-all shadow-sm ${
+                    className={`flex items-center gap-2 px-3 py-2 rounded-full text-sm font-medium whitespace-nowrap transition-all shadow-sm ${
                       filter === filterOption.key
-                        ? 'bg-primary-color text-white shadow-md'
-                        : 'bg-bg-secondary text-text-primary border border-border-color hover:bg-bg-tertiary hover:shadow-md'
+                        ? 'bg-blue-600 text-white shadow-md'
+                        : 'bg-gray-800 text-gray-200 border border-gray-600 hover:bg-gray-700 hover:shadow-md'
                     }`}
                     onClick={() => setFilter(filterOption.key as typeof filter)}
                   >
