@@ -119,10 +119,10 @@ const Bets: React.FC = () => {
                 ].map(filterOption => (
                   <button
                     key={filterOption.key}
-                    className={`flex items-center gap-2 px-3 py-2 rounded-full text-sm font-medium whitespace-nowrap transition-all shadow-sm ${
+                    className={`filter-pill flex items-center gap-2 px-4 py-3 rounded-full text-sm font-medium whitespace-nowrap transition-all shadow-sm min-w-[120px] justify-center ${
                       filter === filterOption.key
-                        ? 'bg-blue-600 text-white shadow-md'
-                        : 'bg-gray-800 text-gray-200 border border-gray-600 hover:bg-gray-700 hover:shadow-md'
+                        ? 'active'
+                        : ''
                     }`}
                     onClick={() => setFilter(filterOption.key as typeof filter)}
                   >

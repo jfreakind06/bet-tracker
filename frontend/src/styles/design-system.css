@@ -390,22 +390,58 @@ body {
   }
 }
 
-/* Filter Pills Color Fix */
+/* Filter Pills - Mobile Optimized */
 .filter-pill {
   background-color: var(--bg-secondary);
   color: var(--text-primary);
   border: 1px solid var(--border-color);
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-tight);
+  min-height: var(--tap-target-min);
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .filter-pill:hover {
   background-color: var(--bg-tertiary);
   border-color: var(--primary-color);
+  transform: translateY(-1px);
+}
+
+.filter-pill:active {
+  transform: translateY(0);
 }
 
 .filter-pill.active {
   background-color: var(--primary-color);
   color: white;
   border-color: var(--primary-color);
+  box-shadow: var(--shadow-md);
+}
+
+/* Enhanced Mobile Responsiveness for Pills */
+@media (max-width: 480px) {
+  .filter-pill {
+    min-width: 100px;
+    padding: var(--space-sm) var(--space-md);
+    font-size: var(--font-size-xs);
+  }
+  
+  .filter-pill span {
+    display: inline-block;
+  }
+  
+  /* Ensure horizontal scroll containers work smoothly */
+  .overflow-x-auto {
+    -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE/Edge */
+  }
+  
+  .overflow-x-auto::-webkit-scrollbar {
+    display: none; /* Chrome/Safari */
+  }
 }
 
 /* Safe Area Support for Mobile */
