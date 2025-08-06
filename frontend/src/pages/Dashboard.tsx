@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
 import '../pagesCss/Dashboard.css';
 import RoiSummary from '../components/RoiSummary';
 import BankrollChart from '../components/Charts/BankrollChart';
@@ -8,6 +7,7 @@ import QuickActions from '../components/Dashboard/QuickActions';
 import RecentActivity from '../components/Dashboard/RecentActivity';
 import AddBetForm from '../components/Forms/AddBetForm';
 import UpdateBetModal from '../components/Bets/UpdateBetModal';
+import { getBets, addBet as addBetAPI, getROI } from '../services/api';
 
 interface Bet {
   id: number;
@@ -56,12 +56,17 @@ const Dashboard: React.FC = () => {
   const fetchBets = async () => {
     try {
       setLoading(true);
-      const res = await axios.get('http://localhost:5000/bets', {
-        headers: { Authorization: `Bearer ${token}` },
-      });
-      setBets(res.data as Bet[]);
+      const data = await getBets();
+      if (data.error) {
+        console.error('Failed to fetch bets:', data.error);
+        setError(data.error);
+      } else {
+        setBets(data as Bet[]);
+        setError('');
+      }
     } catch (err) {
       console.error('Failed to fetch bets', err);
+      setError('Failed to load bets. Please refresh.');
     } finally {
       setLoading(false);
     }
@@ -69,11 +74,14 @@ const Dashboard: React.FC = () => {
 
   const fetchROI = async () => {
     try {
-      const res = await axios.get(`https://bet-tracker-production.up.railway.app/bets/roi?timeframe=${timeframe}`, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
-      setRoi(res.data as RoiData);
-      setError('');
+      const data = await getROI(timeframe);
+      if (data.error) {
+        console.error('Failed to fetch ROI:', data.error);
+        setError(data.error);
+      } else {
+        setRoi(data as RoiData);
+        setError('');
+      }
     } catch (err) {
       console.error('Failed to fetch ROI', err);
       setError('Failed to fetch ROI.');
@@ -83,31 +91,31 @@ const Dashboard: React.FC = () => {
   const addBet = async (formData: BetFormData) => {
     try {
       setAddBetLoading(true);
-      const res = await axios.post(
-        'https://bet-tracker-production.up.railway.app/bets',
-        {
-          date: formData.date,
-          description: formData.description,
-          amountRisked: parseFloat(formData.amountRisked),
-          odds: parseFloat(formData.odds),
-          result: formData.result,
-          payout: formData.payout ? parseFloat(formData.payout) : 0,
-          // Additional fields that could be stored in notes or separate fields
-          betType: formData.betType,
-          sport: formData.sport,
-          notes: formData.notes,
-        },
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        }
-      );
-      setBets([res.data as Bet, ...bets]);
-      setModalOpen(false);
-      // Refresh ROI data after adding a bet
-      fetchROI();
+      const betData = {
+        date: formData.date,
+        description: formData.description,
+        amountRisked: parseFloat(formData.amountRisked),
+        odds: parseFloat(formData.odds),
+        result: formData.result,
+        payout: formData.payout ? parseFloat(formData.payout) : 0,
+        betType: formData.betType,
+        sport: formData.sport,
+        notes: formData.notes,
+      };
+      
+      const newBet = await addBetAPI(betData);
+      if (newBet.error) {
+        setError(newBet.error);
+      } else {
+        // Refresh both bets and ROI data
+        await fetchBets();
+        await fetchROI();
+        setModalOpen(false);
+        setError('');
+      }
     } catch (err) {
       console.error('Failed to add bet', err);
-      // Could show error toast here
+      setError('Failed to add bet. Please try again.');
     } finally {
       setAddBetLoading(false);
     }
@@ -118,12 +126,18 @@ const Dashboard: React.FC = () => {
     setUpdateModalOpen(true);
   };
 
-  const handleBetUpdated = (updatedBet: Bet) => {
-    setBets(bets.map(bet => bet.id === updatedBet.id ? updatedBet : bet));
-    setUpdateModalOpen(false);
-    setSelectedBet(null);
-    // Refresh ROI data after updating a bet
-    fetchROI();
+  const handleBetUpdated = async (updatedBet: Bet) => {
+    try {
+      // Refresh all data to ensure everything is in sync
+      await fetchBets();
+      await fetchROI();
+      setUpdateModalOpen(false);
+      setSelectedBet(null);
+      setError('');
+    } catch (err) {
+      console.error('Failed to refresh data after bet update', err);
+      setError('Bet updated but failed to refresh data. Please refresh the page.');
+    }
   };
 
   // Helper functions for dashboard calculations
@@ -225,7 +239,20 @@ const Dashboard: React.FC = () => {
       {/* Header with Welcome Message */}
       <header className="dashboard__header">
         <div>
-          <h1 className="dashboard__title">Welcome Back!</h1>
+          <h1 className="dashboard__title">
+            Welcome Back{(() => {
+              try {
+                const user = localStorage.getItem('user');
+                if (user) {
+                  const userData = JSON.parse(user);
+                  return userData.username ? `, ${userData.username}!` : '!';
+                }
+                return '!';
+              } catch {
+                return '!';
+              }
+            })()}
+          </h1>
           <p className="text-secondary text-sm">
             Track your betting performance and grow your bankroll
           </p>

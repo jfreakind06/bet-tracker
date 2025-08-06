@@ -24,6 +24,9 @@ export default function Login() {
       const data = await login(email, password);
       if (data.token) {
         localStorage.setItem('token', data.token);
+        if (data.user) {
+          localStorage.setItem('user', JSON.stringify(data.user));
+        }
         // Trigger storage event for App component
         window.dispatchEvent(new Event('storage'));
         navigate('/dashboard');

@@ -120,65 +120,89 @@ const Profile: React.FC = () => {
     </div>
   );
 
-  const renderAccountTab = () => (
-    <div className="space-y-6">
-      <div className="card">
-        <div className="card-header">
-          <h2 className="text-lg font-semibold">Account Information</h2>
-        </div>
-        <div className="card-body space-y-4">
-          <div className="form-group">
-            <label className="form-label">Email</label>
-            <input 
-              type="email" 
-              className="form-input" 
-              placeholder="your@email.com"
-              disabled
-            />
-          </div>
-          
-          <div className="form-group">
-            <label className="form-label">Display Name</label>
-            <input 
-              type="text" 
-              className="form-input" 
-              placeholder="Your display name"
-            />
-          </div>
-          
-          <button className="btn btn-primary">
-            Update Account
-          </button>
-        </div>
-      </div>
+  const renderAccountTab = () => {
+    const getUserInfo = () => {
+      try {
+        const user = localStorage.getItem('user');
+        if (user) {
+          return JSON.parse(user);
+        }
+        return null;
+      } catch {
+        return null;
+      }
+    };
 
-      <div className="card">
-        <div className="card-header">
-          <h2 className="text-lg font-semibold">Security</h2>
-        </div>
-        <div className="card-body space-y-4">
-          <button className="btn btn-secondary">
-            🔒 Change Password
-          </button>
-        </div>
-      </div>
+    const userInfo = getUserInfo();
 
-      <div className="card">
-        <div className="card-body text-center">
-          <h3 className="font-semibold mb-2 text-error">Danger Zone</h3>
-          <p className="text-sm text-secondary mb-4">
-            This action cannot be undone
-          </p>
-          <button 
-            onClick={handleLogout}
-            className="btn btn-secondary"
-          >
-            🚪 Logout
-          </button>
+    return (
+      <div className="space-y-6">
+        <div className="card">
+          <div className="card-header">
+            <h2 className="text-lg font-semibold">Account Information</h2>
+          </div>
+          <div className="card-body space-y-4">
+            <div className="form-group">
+              <label className="form-label">Username</label>
+              <input 
+                type="text" 
+                className="form-input" 
+                value={userInfo?.username || ''}
+                disabled
+              />
+              <p className="text-xs text-secondary mt-1">
+                Username cannot be changed after registration
+              </p>
+            </div>
+
+            <div className="form-group">
+              <label className="form-label">Email</label>
+              <input 
+                type="email" 
+                className="form-input" 
+                value={userInfo?.email || ''}
+                disabled
+              />
+            </div>
+            
+            <div className="p-3 bg-tertiary rounded-lg">
+              <p className="text-sm text-secondary">
+                💡 <strong>Note:</strong> Account information updates are coming soon. 
+                For now, account details are read-only.
+              </p>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-  );
+        
+        <div className="card">
+          <div className="card-header">
+            <h2 className="text-lg font-semibold">Security</h2>
+          </div>
+          <div className="card-body space-y-4">
+            <button className="btn btn-secondary">
+              🔒 Change Password
+            </button>
+          </div>
+        </div>
+
+        <div className="card">
+          <div className="card-body text-center">
+            <h3 className="font-semibold mb-2 text-error">Danger Zone</h3>
+            <p className="text-sm text-secondary mb-4">
+              This action cannot be undone
+            </p>
+            <button 
+              onClick={handleLogout}
+              className="btn btn-secondary"
+            >
+              🚪 Logout
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+  };
 
   return (
     <div className="container">

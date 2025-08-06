@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 import BankrollChart from '../components/Charts/BankrollChart';
 import PerformanceChart from '../components/Analytics/PerformanceChart';
 import ROITrendChart from '../components/Analytics/ROITrendChart';
 import StreakAnalysis from '../components/Analytics/StreakAnalysis';
+import { getBets } from '../services/api';
 
 interface Bet {
   id: number;
@@ -29,10 +29,12 @@ const Analytics: React.FC = () => {
     const fetchBets = async () => {
       try {
         setLoading(true);
-        const res = await axios.get('https://bet-tracker-production.up.railway.app/bets', {
-          headers: { Authorization: `Bearer ${token}` },
-        });
-        setBets(res.data as Bet[]);
+        const data = await getBets();
+        if (data.error) {
+          console.error('Failed to fetch bets:', data.error);
+        } else {
+          setBets(data as Bet[]);
+        }
       } catch (err) {
         console.error('Failed to fetch bets', err);
       } finally {
@@ -40,7 +42,9 @@ const Analytics: React.FC = () => {
       }
     };
 
-    fetchBets();
+    if (token) {
+      fetchBets();
+    }
   }, [token]);
 
   // Filter bets based on time filter
