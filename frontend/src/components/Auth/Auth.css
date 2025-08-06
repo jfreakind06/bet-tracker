@@ -256,6 +256,7 @@
   right: 0;
   height: 1px;
   background-color: var(--border-color);
+  z-index: 1;
 }
 
 .auth-divider span {
@@ -263,22 +264,30 @@
   padding: 0 var(--space-md);
   color: var(--text-muted);
   font-size: var(--font-size-sm);
+  position: relative;
+  z-index: 2;
 }
 
 /* Auth Link Button */
 .auth-link {
+  width: 100%;
   text-align: center;
   text-decoration: none;
   font-weight: 500;
   border: 1px solid var(--border-color);
   background-color: transparent;
   color: var(--text-secondary);
+  display: block;
+  padding: var(--space-sm) var(--space-md);
+  border-radius: var(--radius-md);
+  transition: all 0.2s ease-in-out;
 }
 
 .auth-link:hover {
   background-color: var(--bg-tertiary);
   color: var(--text-primary);
   text-decoration: none;
+  border-color: var(--primary-color);
 }
 
 /* Demo Credentials */
