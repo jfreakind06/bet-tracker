@@ -196,7 +196,7 @@ const Analytics: React.FC = () => {
 
   const renderTimeFilter = () => (
     <div className="overflow-x-auto scrollbar-hide w-full">
-      <div className="flex gap-2 pb-2" style={{ width: 'max-content' }}>
+      <div className="flex gap-2 pb-2 px-4" style={{ width: 'max-content' }}>
         {[
           { key: 'all', label: 'All Time', icon: '📅' },
           { key: '7d', label: '7 Days', icon: '📊' },
@@ -252,7 +252,7 @@ const Analytics: React.FC = () => {
             <div className="space-y-2">
               <h3 className="text-sm font-medium text-gray-400">View</h3>
               <div className="overflow-x-auto scrollbar-hide w-full">
-                <div className="flex gap-2 pb-2" style={{ width: 'max-content' }}>
+                <div className="flex gap-2 pb-2 px-4" style={{ width: 'max-content' }}>
                   {renderTabButton('overview', 'Overview', '📊')}
                   {renderTabButton('performance', 'Performance', '🎯')}
                   {renderTabButton('trends', 'Trends', '📈')}

@@ -374,7 +374,6 @@ body {
 .overflow-x-auto {
   scroll-behavior: smooth;
   max-width: 100%;
-  contain: layout;
 }
 
 /* Mobile-friendly button styling */

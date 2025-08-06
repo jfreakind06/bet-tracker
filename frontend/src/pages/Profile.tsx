@@ -215,11 +215,10 @@ const Profile: React.FC = () => {
 
         {/* Tabs */}
         <div className="p-4">
-          <div className="mb-6">
-            <div className="overflow-x-auto scrollbar-hide w-full">
-              <div className="flex gap-2 pb-4 justify-center" style={{ width: 'max-content', margin: '0 auto' }}>
+          <div className="flex justify-center mb-6">
+            <div className="flex gap-2 flex-wrap justify-center max-w-full">
                 <button
-                  className={`filter-pill flex items-center gap-2 px-4 py-3 rounded-full text-sm font-medium whitespace-nowrap transition-all shadow-sm min-w-[140px] justify-center ${
+                  className={`filter-pill flex items-center gap-2 px-4 py-3 rounded-full text-sm font-medium whitespace-nowrap transition-all shadow-sm min-w-[100px] justify-center ${
                     activeTab === 'bankroll' ? 'active' : ''
                   }`}
                   onClick={() => setActiveTab('bankroll')}
@@ -228,7 +227,7 @@ const Profile: React.FC = () => {
                   <span>Bankroll</span>
                 </button>
                 <button
-                  className={`filter-pill flex items-center gap-2 px-4 py-3 rounded-full text-sm font-medium whitespace-nowrap transition-all shadow-sm min-w-[140px] justify-center ${
+                  className={`filter-pill flex items-center gap-2 px-4 py-3 rounded-full text-sm font-medium whitespace-nowrap transition-all shadow-sm min-w-[100px] justify-center ${
                     activeTab === 'settings' ? 'active' : ''
                   }`}
                   onClick={() => setActiveTab('settings')}
@@ -237,7 +236,7 @@ const Profile: React.FC = () => {
                   <span>Settings</span>
                 </button>
                 <button
-                  className={`filter-pill flex items-center gap-2 px-4 py-3 rounded-full text-sm font-medium whitespace-nowrap transition-all shadow-sm min-w-[140px] justify-center ${
+                  className={`filter-pill flex items-center gap-2 px-4 py-3 rounded-full text-sm font-medium whitespace-nowrap transition-all shadow-sm min-w-[100px] justify-center ${
                     activeTab === 'account' ? 'active' : ''
                   }`}
                   onClick={() => setActiveTab('account')}
@@ -245,7 +244,6 @@ const Profile: React.FC = () => {
                   <span className="text-base">👤</span>
                   <span>Account</span>
                 </button>
-              </div>
             </div>
           </div>
 
